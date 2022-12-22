@@ -1,0 +1,25 @@
+ion-content {
+  --ion-background-color: #FFFFFF;
+  ion-row {
+    margin: 20px;
+
+    ion-col {
+
+      ion-input {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        color: black;
+        font-size: small;
+        --placeholder-color: #ccc;
+      }
+    }
+  }
+
+  ion-button {
+    margin: 0 20px 5px 20px;
+    text-transform: none;
+    font-size: small;
+    font-weight: bold;
+  }
+}

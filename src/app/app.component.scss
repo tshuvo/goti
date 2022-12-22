@@ -1,0 +1,47 @@
+
+ion-header {
+  padding: 0;
+  margin: 0;
+
+  ion-toolbar {
+    padding: 0;
+    margin: 0;
+
+    ion-grid {
+      padding: 15px 0 15px 0;
+      margin: 0;
+
+      ion-row {
+        padding: 0;
+        margin: 0;
+
+        ion-col {
+          padding: 0;
+          margin: 0;
+
+          ion-avatar {
+            margin: auto;
+          }
+
+          ion-label {
+            padding: 0;
+            margin: 0;
+            text-transform: none;
+            font-weight: normal;
+            font-size: medium;
+          }
+
+          ion-icon {
+            padding: 0;
+            color: #01C3FD;
+            margin: 0 5px 0 0;
+          }
+        }
+      }
+
+      #user-name-row {
+        padding: 10px 0 0 0;
+      }
+    }
+  }
+}

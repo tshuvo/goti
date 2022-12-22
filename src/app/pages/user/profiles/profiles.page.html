@@ -1,0 +1,186 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text color="light" class="fw700">ইউজার প্রোফাইল</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="formbg">
+    <ion-card id="profile-box">
+        <ion-card-content>
+            <ion-grid>
+
+                <ion-row>
+                    <ion-col class="ion-text-center">
+                        <ion-avatar>
+                            <ion-img src={{uploadPhoto}} (click)="browseImageFile('user')"></ion-img>
+                        </ion-avatar>
+                    </ion-col>
+                </ion-row>
+
+                <!-- -------------------READ ONLY PART------------------------------- -->
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">লগ-ইন নাম</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="logInName" type="text" readonly="true"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size=".5"></ion-col>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">ই-মেইল</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="email" type="text" readonly="true"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">যোগাযোগের নাম্বার</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="mobileNo" type="text" readonly="true"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+
+                <!-- -------------------EDITABLE PART------------------------------- -->
+                <ion-row id="editable-part">
+                    <ion-col>
+                        <ion-card-subtitle color="h2">ইউজারের নাম</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input readonly [(ngModel)]="userName" type="text" placeholder="এখানে লিখুন"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size=".5"></ion-col>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">পিতার নাম</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="fatherName" type="text" placeholder="এখানে লিখুন"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">মাতার নাম</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="motherName" type="text" placeholder="এখানে লিখুন"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size=".5"></ion-col>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">ঠিকানা</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="address" type="text" placeholder="এখানে লিখুন"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">লিঙ্গ</ion-card-subtitle>
+                        <ion-select [(ngModel)]="gender" placeholder="নির্বাচন করুন">
+                            <ion-select-option value="1">Male</ion-select-option>
+                            <ion-select-option value="2">Female</ion-select-option>
+                            <ion-select-option value="3">Others</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size=".5"></ion-col>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">রক্তের গ্রুপ</ion-card-subtitle>
+                        <ion-select [(ngModel)]="bloodGroupId" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="group.id" *ngFor="let group of bloodGroupList">{{group.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">জন্ম তারিখ</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-datetime [disabled]="nidVerified" [(ngModel)]="dob" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" placeholder="দিন/মাস/বছর"></ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size=".5"></ion-col>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">জাতীয় পরিচয়পত্র নাম্বার</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [disabled]="nidVerified" [(ngModel)]="nationalId" type="text" placeholder="এখানে লিখুন"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">পাসপোর্ট নাম্বার</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="passportNo" type="text" placeholder="এখানে লিখুন"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size=".5"></ion-col>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">জন্ম নিবন্ধন নাম্বার</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="birthCertificateNo" type="text" placeholder="এখানে লিখুন"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">বিভাগ</ion-card-subtitle>
+                        <ion-select [(ngModel)]="divisionId" placeholder="নির্বাচন করুন" (ionChange)="loadDistrictListByDivision($event)">
+                            <ion-select-option [value]="division.id" *ngFor="let division of divisionList">{{division.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size=".5"></ion-col>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">জেলা</ion-card-subtitle>
+                        <ion-select [(ngModel)]="districtId" placeholder="নির্বাচন করুন" (ionChange)="loadPoliceStationListByDistrict($event)">
+                            <ion-select-option [value]="district.id" *ngFor="let district of districtList">{{district.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">থানা</ion-card-subtitle>
+                        <ion-select [(ngModel)]="policeStationId" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="policeStation.id" *ngFor="let policeStation of policeStationList">{{policeStation.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size=".5"></ion-col>
+                    <ion-col>
+                        <ion-card-subtitle color="h2">পোস্ট কোড</ion-card-subtitle>
+                        <ion-item lines="none">
+                            <ion-input [(ngModel)]="postCode" type="text" placeholder="এখানে লিখুন"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row id="button-container">
+                    <ion-col>
+                        <ion-button (click)="onCancelClick()" expand="full" type="submit" class="ion-no-margin" color="disabled">বাতিল করুন</ion-button>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col>
+                        <ion-button (click)="onUpdateProfileClicked()" expand="full" type="submit" class="ion-no-margin" color="button">প্রোফাইল হালনাগাদ</ion-button>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

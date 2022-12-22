@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">
+            <ion-text color="light" class="fw700">ওটিপি যাচাইকরণ</ion-text>
+        </ion-title>
+        <!--<ion-buttons slot="end">-->
+            <!--<ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>-->
+        <!--</ion-buttons>-->
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="formbg">
+
+    <ion-card-subtitle>
+        <ion-text>আপনি একই মোবাইল নম্বর এর জন্য তিন বারের বেশী OTP পাঠাতে পারবেন না ।</ion-text>
+    </ion-card-subtitle>
+
+    <ion-item lines="none">
+        <ion-input [(ngModel)]="varificationCode" name="varificationCode" id="mobile" type="number" placeholder="এখানে যাচাইকরণ কোড লিখুন" maxlength="4" minlength="4" required></ion-input>
+        <ion-label *ngIf="otpTimeCounter >=0 " class="ion-text-center"> {{otpTimeCounter}}সেঃ</ion-label>
+    </ion-item>
+
+    <ion-label class="ion-text-left" (click)="sendOtp()" id="resend-otp-btn" *ngIf="otpTimeCounter == 0;">পুনরায় পাঠান</ion-label>
+
+    <ion-button expand="full" (click)="verifyOtp()" color="button">পরবর্তী</ion-button>
+
+</ion-content>

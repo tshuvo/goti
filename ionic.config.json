@@ -1,0 +1,7 @@
+{
+  "name": "bspapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

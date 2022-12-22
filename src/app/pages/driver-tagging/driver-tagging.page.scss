@@ -1,0 +1,175 @@
+
+.text-size {
+  font-size: 12px;
+}
+
+.text-size-2 {
+  font-size: 13px;
+}
+
+.input-control_upper_case {
+  // display: block;
+  width: 100%;
+  height: 35px;
+  text-transform: uppercase;
+  //margin-left: 5px;
+  //padding: 6px 12px;
+  font-size: 13px;
+  //line-height: 1.42857143;
+  color: #000;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  // border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+
+.row-divider {
+  color: #000;
+  font-size: 14px;
+}
+
+.ion-rows {
+  color: #000;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.input-control {
+  height: 35px;
+  width: 100%;
+  font-size: 13px;
+  color: #000;
+  background-color: #fff;
+  background-image: none;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.textarea-control {
+  width: 100%;
+  height: 60px;
+  font-size: 13px;
+  color: #000;
+  background-color: #fff;
+  background-image: none;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.button-text {
+  border-radius: 0;
+  width: 100%;
+  text-transform: none;
+  --ion-color-primary: #5bc0de;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #fff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}
+
+.button-text-2 {
+  border-radius: 0;
+  width: 100%;
+  text-transform: none;
+  --ion-color-primary: #5cb85c;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}
+
+.ion-cols {
+  padding: 0;
+  margin: 0;
+}
+
+.borders {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+ion-content {
+  margin: 0;
+  padding: 0;
+
+  #driver-list-box {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+
+    ion-card-content {
+      padding: 0;
+      margin-top: 10px;
+
+      ion-item {
+        margin: 0;
+        padding: 0;
+
+        ion-text {
+          margin: 0;
+          padding: 0;
+          text-transform: none;
+          font-weight: normal;
+          color: black;
+          font-size: small;
+        }
+      }
+
+      ion-card-subtitle {
+        margin-left: 15px;
+        padding: 0;
+        color: black;
+        font-weight: normal;
+        font-size: small;
+
+        ion-icon {
+          --color: default;
+        }
+      }
+
+      ion-row {
+        margin-top: 5px;
+        background-color: #EFEFEF;
+        height: 1px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+ion-card-header {
+  margin: 0;
+  padding: 10px;
+  background-color: #683091;
+
+  ion-card-title {
+    font-weight: normal;
+    text-transform: none;
+    font-size: small;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+
+    b, p {
+      margin: 0;
+      padding: 2% 0 0 0;
+    }
+  }
+}
+

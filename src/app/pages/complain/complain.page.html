@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-toolbar color="button">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <ion-text color="light" class="fw700">মতামত </ion-text>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="home" text="" class="header_button_r" icon="arrow-round-back" color="light"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" *ngIf="is_new == 'Y';">
+  <!--<ion-card-header color="tertiary"
+                   style="background:url(../../../../assets/icon/complain_b.png); background-size: cover; height: 80px;">
+  </ion-card-header>-->
+  <ion-card class="ion-padding">
+    <ion-list>
+      <!-- <ion-label position="floating">Comment type</ion-label>
+      <ion-item>
+
+          <ion-select placeholder="Select One" name="complain_type_id" id="complain_type_id"  [(ngModel)]="complain_type_id">
+
+          </ion-select>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label position="floating">Feedback type</ion-label>
+        <ion-select placeholder="Select One" [(ngModel)]="complain_type_id" id="complain_type_id"
+                    [value]="complain_type_id">
+          <ion-select-option *ngFor="let typeData of complainTypeList;" value="{{typeData.id}}">
+            {{typeData.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+
+
+    <ion-item>
+      <ion-label position="floating">Your Feedback</ion-label>
+      <ion-textarea class="complain_desc" [(ngModel)]="complain_desc"
+                    name="complain_desc" id="complain_desc" clearOnEdit="true" rows="8" maxlength="200" required>
+      </ion-textarea>
+
+
+      <ion-textarea style="display:none" [(ngModel)]="audioVideoData" clearOnEdit="true" ></ion-textarea>
+
+
+    </ion-item>
+    <ion-label color="danger" size="1"style="float:right"> Max 200 characters. </ion-label>
+
+    <ion-item  (click)="browseImageFile()" style="width: 100%">
+    <!--<ion-item  (click)="selectMedia()" style="width: 100%">-->
+      <ion-label *ngIf="takePhotoLevel == 'Add your photo'" style="color: #0ec254">
+        {{takePhotoLevel}}
+        <!--Add your photo-->
+        <!--<span style="color:black">Add your photo or video</span>-->
+        <ion-icon style="float:right; font-size: large;border:none; " color="primarys" name="image" ></ion-icon>
+
+      </ion-label>
+
+      <ion-label *ngIf="takePhotoLevel == 'Photo attached'" style="color: #FF0000">
+        {{takePhotoLevel}}
+        <!--Add your photo-->
+        <!--<span style="color:black">Add your photo or video</span>-->
+        <ion-icon style="float:right; font-size: large;border:none; " color="primarys" name="image" ></ion-icon>
+
+      </ion-label>
+    </ion-item>
+
+
+    <!--<div  style="padding-top: 2%; padding-left: 3%;">-->
+      <!--<div *ngFor="let f of files">-->
+        <!--<ion-checkbox style="float: left; margin-top: 3%; " id="mediaCheck" [(ngModel)] = "checkedFile" color="secondary" slot="start" (ionChange) = "startUpload(f)" ></ion-checkbox>-->
+        <!--<ion-icon  style="padding-left: 3%; margin-top: 3%; font-size: x-large;" name="play" slot="start" (click)="openFile(f)" ></ion-icon>-->
+
+        <!--<ion-label style="padding-left: 3%;" class="ion-text-wrap">-->
+          <!--{{ f.name }}-->
+          <!--&lt;!&ndash; <p>{{ f.fullPath }}</p> &ndash;&gt;-->
+        <!--</ion-label>-->
+        <!--<ion-button style="float: right;" slot="end" fill="clear" (click)="deleteFile(f)">-->
+          <!--<ion-icon slot="icon-only" name="trash"></ion-icon>-->
+        <!--</ion-button>-->
+      <!--</div>-->
+
+
+    <!--</div>-->
+
+
+    <!--<ion-button color="primary" class="login submit-btn" size="default" expand="full" (click)="saveComplain()">-->
+    <ion-button color="button" class="login submit-btn" size="default" expand="full" (click)="saveComplain()">
+      Submit
+    </ion-button>
+
+
+
+  </ion-card>
+
+
+
+</ion-content>
+
+
+<ion-content class="padding" *ngIf="is_new == 'N';">
+
+  <ion-card class="padding" *ngFor="let complain of select_data;" style="color: black; font-size: small">
+    <div >
+      <h6 style="text-align: left" ><b><ion-icon name="person"></ion-icon>: </b>{{complain.comment | titlecase}}</h6>
+      <p  style="font-size: smaller; color:gray; text-align: left ">{{complain.commentDate }}</p>
+    </div>
+    <div *ngIf="complain.replyYn =='Y'">
+      <h6 style="text-align: right" >{{complain.replyComments | titlecase }} <b style="color:green "> :<ion-icon name="car"></ion-icon></b></h6>
+      <p style="text-align: right;font-size: smaller; color:gray">{{complain.replyDate  }}</p>
+    </div>
+
+  </ion-card>
+
+  <ion-content padding *ngIf="errorMsgShow == 'YES';">
+    <ion-card padding style="background-color: antiquewhite;">
+      <p>{{errorMsg}}</p>
+    </ion-card>
+  </ion-content>
+
+</ion-content>
+
+
+
+<ion-tab-bar slot="bottom" color="button">
+
+  <ion-tab-button tab="currentTAB" id="current_id" (click)="beingNewPage()" [ngStyle]="{'color': current_id}">
+    <ion-label>New Feedback</ion-label>
+    <ion-icon name="create"></ion-icon>
+  </ion-tab-button>
+
+  <ion-tab-button tab="upcomingTAB" id="upcoming_id" (click)="showPreviousComments()"
+                  [ngStyle]="{'color': upcoming_id}">
+    <ion-label>Previous Feedback's</ion-label>
+    <ion-icon name="chatboxes"></ion-icon>
+  </ion-tab-button>
+
+
+</ion-tab-bar>

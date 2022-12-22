@@ -1,0 +1,99 @@
+#head {
+    color: white;
+    z-index: 0;
+    ion-button {
+        font-size: small;
+        color: #fff;
+    }
+    .powered-logo {
+        height: 55%;
+        ion-img {
+            width: 50px;
+        }
+        ion-icon {
+            font-size: 70px;
+            margin-top: -10px;
+        }
+    }
+    .header-middle-content {
+        text-align: center;
+        height: 100%;
+        display: -webkit-box;
+        -webkit-box-pack: center;
+        -webkit-box-align: center;
+        display: -moz-box;
+        -moz-box-pack: center;
+        -moz-box-align: center;
+        display: -ms-flexbox;
+        -ms-flex-pack: center;
+        -ms-flex-align: center;
+        width: auto;
+    }
+}
+
+.main-menu {
+    font-size: 10px;
+    --padding-end: 20px;
+    --padding-start: 20px;
+    --padding-bottom: 0;
+    --padding-top: 10%;
+    --margin-left: 0px;
+    --margin-right: 0px;
+    max-width: 100px;
+    ion-icon {
+        font-size: 50px;
+    }
+    ion-label {
+        margin-top: 7px;
+        font-size: x-small;
+        display: contents;
+        line-height: inherit;
+        color: gray;
+    }
+}
+
+
+/*.content-slider {
+    min-height: 100%;
+}*/
+
+.swiper-slide {
+    display: block;
+}
+
+.swiper-pagination {
+    margin-top: 5px;
+}
+
+ion-slide>img {
+    max-height: 50%;
+    max-width: 60%;
+    margin: 36px 0;
+}
+
+ion-card-content>ion-icon {
+    font-size: 200px;
+}
+
+ion-card-content>h4 {
+    color: red;
+}
+
+.counter {
+    position: absolute;
+    top: 25%;
+    // float: right;
+    left: 70%;
+    color: #f04141;
+    border: 1px solid #f04141;
+    //background-color: red;
+    border-radius: 100%;
+    padding: 0;
+    margin: 0;
+    height: 18px;
+    width: 18px;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    text-align: center;
+}

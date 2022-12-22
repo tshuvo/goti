@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-toolbar color="button">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <ion-text color="light" class="fw700">ফি এর বিবরণ</ion-text>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="margin: 10px;" >
+    <ion-row style="background-color: #3880ff; color: #fff;">
+      <ion-col class="borders-2 ion-cols cols-padding" size="4">
+        <ion-label> পরীক্ষার তথ্য </ion-label>
+      </ion-col>
+      <!--<ion-col class="ion-text-right ion-cols cols-padding" size="4">-->
+        <!--<ion-label> পরিমাণ </ion-label>-->
+      <!--</ion-col>-->
+    </ion-row>
+
+
+
+    <ion-row style="font-weight: bold;" class="borders ion-cols" >
+      <ion-col size="4" class="borders-2 ion-cols cols-padding">
+        <ion-label class="row-divider">
+          পরীক্ষার স্থান
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-right ion-cols cols-padding" size="8">
+        <ion-label class="row-divider">{{examVanue}}</ion-label>
+      </ion-col>
+    </ion-row>
+
+<ion-row style="font-weight: bold;" class="borders ion-cols" >
+      <ion-col size="4" class="borders-2 ion-cols cols-padding">
+        <ion-label class="row-divider">
+          পরীক্ষার তারিখ
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-right ion-cols cols-padding" size="8">
+        <ion-label class="row-divider">{{examDate}}</ion-label>
+      </ion-col>
+    </ion-row>
+
+<ion-row style="font-weight: bold;" class="borders ion-cols" >
+      <ion-col size="4" class="borders-2 ion-cols cols-padding">
+        <ion-label class="row-divider">
+          পরীক্ষার সময়
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-right ion-cols cols-padding" size="8">
+        <ion-label class="row-divider">{{examTime}}</ion-label>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-grid>
+
+  <ion-grid style="margin: 10px;" >
+    <ion-row style="background-color: #3880ff; color: #fff;">
+      <ion-col class="borders-2 ion-cols cols-padding" size="8">
+        <ion-label> ফি এর শ্রেণী</ion-label>
+      </ion-col>
+      <ion-col class="ion-text-right ion-cols cols-padding" size="4">
+        <ion-label> পরিমাণ </ion-label>
+      </ion-col>
+    </ion-row>
+
+
+    <div  class="borders ion-cols" *ngFor="let item of paymentDetailsList">
+      <ion-row>
+        <ion-col class=" borders-2 ion-cols cols-padding" size="8">
+          <ion-label class="row-divider"> {{item.ruleName}} </ion-label>
+        </ion-col>
+        <ion-col class="ion-text-right ion-cols cols-padding" size="4">
+          <ion-label class="row-divider"> {{item.totalFee | currency:"৳ ":true:"1.2"}} </ion-label>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <ion-row style="font-weight: bold;" class="borders ion-cols" >
+      <ion-col size="8" class="borders-2 ion-cols cols-padding">
+        <ion-label class="row-divider">
+          মোট পরিমাণ (টাকা)
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-right ion-cols cols-padding" size="4">
+        <ion-label class="row-divider">{{totalAmount | currency:"৳ ":true:"1.2"}}</ion-label>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row style="margin: 10px; font-size: large; color: #de1400; border: 1px solid #de1400; padding: 5px">
+      <ion-label class="text-size-2">
+        প্রথম নির্বাচিত যানবাহন শ্রেণীর জন্য ফি হবে 300 টাকা এবং 15% ভ্যাট, এবং প্রতিটি অতিরিক্ত নির্বাচিত যানবাহন শ্রেণীর জন্য 150 টাকা এবং 15% ভ্যাট *।
+      </ion-label>
+    </ion-row>
+
+
+    <ion-row class="ion-rows borders ion-cols">
+      <ion-col size="6" class="ion-cols ion-text-center cols-padding">
+        <ion-button class="button-text" color="disabled" (click)="descardTransaction()"> লেনদেন বাতিল করুন
+        </ion-button>
+      </ion-col>
+
+      <ion-col class="ion-cols ion-text-center cols-padding" size="6">
+        <ion-button class="button-text-2" color="button" (click)="payNow()">ফি জমা দিন
+        </ion-button>
+        <ion-button #paymentBtn style="display:none">ফি জমা দিন</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <div [hidden]="bankingTextShow" style="margin: 15px; font-size: large; color: #00047E; border: 1px solid #cccccc; padding: 5px">
+    <ion-row *ngFor="let item of bankingMessage" >
+      <ion-label style="padding: 5px 0 5px 0"> {{" * "+ item.toString().trim() +"।"}}</ion-label>
+    </ion-row>
+  </div>
+</ion-content>
+

@@ -1,0 +1,1065 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="ion-cols ion-text-center">
+            <ion-text color="light" class="ion-text-wrap">
+                <ion-text color="light" class="fw700 ion-text-wrap">ড্রাইভিং লাইসেন্সের জন্য আবেদন</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <!--<ion-button size="small" shape="round" color="medium" routerLink="/home">
+              <ion-icon color="white" name="home" class="header_button_r"></ion-icon>
+            </ion-button>-->
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+    <div>
+
+        <!-- Smart Wizard -->
+        <div style="padding-left: 10px; padding-right: 10px">
+        <div class="flex justify-content-space-between ion-margin-top relative" >
+
+            <div class="absolute full-width line">
+                <span [style.width]="progressBar"></span>
+            </div>
+
+            <div class="flex flex-columns justify-content-centers full-width"
+                 *ngFor="let slide of wizardSteps; let index = index; let first = first; let last = last;">
+
+        <span [ngClass]="{ 'align-self-end': last, 'align-self-center': (!first && !last) }"
+              class="flex flex-columns align-items-centers justify-content-centers bold text-medium radius wizard"
+              [style.background]="completeWizardSteps.length > (index) ? '#1ABB9C' : slide === currentSlide ? '#34495E' : '#ccc'"
+              [style.color]="slide === currentSlide ? '#fff':'#fff'">
+          {{ index + 1 }}
+        </span>
+
+                <!--<span [style.color]="completeWizardSteps.length > (index) ? '#1ABB9C' : slide === currentSlide ? '#34495E' : '#ccc'"-->
+                      <!--[ngClass]="{ 'align-self-end': last, 'align-self-center': (!first && !last) }"-->
+                      <!--class="flex text-medium bold ion-margin-vertical">-->
+          <!--{{ slide }}-->
+        <!--</span>-->
+            </div>
+        </div>
+        </div>
+
+        <ion-slides [options]="slidesOpts" (ionSlideDidChange)="onSlidesDidChange()"
+                    (ionSlideWillChange)="onSlidesChanged()">
+
+            <ng-container *ngFor="let slide of wizardSteps">
+
+                <ion-slide>
+
+                    <div class="full-width ion-text-start">
+
+                        <div *ngIf="slide === 'Billing'">
+
+
+                            <ion-card class="ion-padding" [ngClass]="nidDataPart">
+                                <ion-card-content class="ion-no-margin ion-no-padding">
+                                    <ion-card-subtitle class="ion-text-center">জাতীয় পরিচয়পত্র এর তথ্য
+                                    </ion-card-subtitle>
+                                    <ion-card-title></ion-card-title>
+                                    <ion-item lines="none" class="ion-no-margin ion-no-padding">
+
+                                        <ion-img alt="Image" src="{{nidPhoto}}"></ion-img>
+
+                                    </ion-item>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>জাতীয় পরিচয়পত্র নম্বর *</ion-text>
+                                            </ion-label>
+                                            <ion-input [ngModel]="nidNo" placeholder="NID No"
+                                                       [readonly]="true"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>জন্ম তারিখ *</ion-text>
+                                            </ion-label>
+                                            <ion-input [ngModel]="dob" placeholder="DOB" [readonly]="true"></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>নাম (ইংরেজী) *</ion-text>
+                                            </ion-label>
+                                            <ion-input [ngModel]="nameEng" placeholder="name english"
+                                                       [readonly]="true"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>নাম (বাংলা)</ion-text>
+                                            </ion-label>
+                                            <ion-input [ngModel]="nameBn" placeholder="name bangla"
+                                                       [readonly]="true"></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>পিতার নাম (বাংলা)</ion-text>
+                                            </ion-label>
+                                            <ion-input [ngModel]="fatherNameBn" placeholder="father name english"
+                                                       [readonly]="true"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>মাতার নাম (বাংলা)</ion-text>
+                                            </ion-label>
+                                            <ion-input [ngModel]="motherNameBn" placeholder="name bangla"
+                                                       [readonly]="true"></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-card-content>
+                            </ion-card>
+
+
+                        </div>
+
+                        <div *ngIf="slide === 'Shipping'">
+
+
+                            <ion-card class="ion-padding">
+                                <ion-card-content class="ion-no-margin ion-no-padding">
+                                    <ion-card-subtitle class="ion-text-center">ড্রাইভিং লাইসেন্স এর তথ্য
+                                    </ion-card-subtitle>
+                                    <ion-card-title></ion-card-title>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>লাইসেন্সের ভাষা *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions"
+                                                        [(ngModel)]="languageLicenseSelected"
+                                                         placeholder="Select One">
+
+                                                <!--(ionChange)="languageLicenseChange()" placeholder="Select One">-->
+                                                <ion-select-option *ngFor="let item of languageLicenseList"
+                                                                   [value]="item.languageValue">
+                                                    {{item.languageText}}
+                                                </ion-select-option>
+                                            </ion-select>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>আবেদনের ধরণ *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions" placeholder="Select One"
+                                                        [(ngModel)]="applicationType">
+                                                <ion-select-option *ngFor="let item of applicationTypeLists"
+                                                                   [value]="item.applicationTypeId">
+                                                    {{item.applicationTypeName}}
+                                                </ion-select-option>
+                                            </ion-select>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>লাইসেন্সের ধরণ *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions"
+                                                        [(ngModel)]="selectedLicenseType" placeholder="Select One"
+                                                        (ngModelChange)="onLicenseTypeClick()">
+                                                <ion-select-option value="3">NON-PROFESSIONAL</ion-select-option>
+                                                <ion-select-option value="2">PROFESSIONAL</ion-select-option>
+                                            </ion-select>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>আবেদনকারীর ধরণ *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions" placeholder="Select One"
+                                                        [(ngModel)]="applicantType">
+                                                <ion-select-option *ngFor="let item of applicaticantList"
+                                                                   [value]="item.applicantTypeId">
+                                                    {{item.applicantTypeName}}
+                                                </ion-select-option>
+                                            </ion-select>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="12">
+                                            <ion-label>
+                                                <ion-text>মোটরযানের শ্রেণী *</ion-text>
+                                            </ion-label>
+                                            <ion-select  placeholder="Select One"
+                                                        multiple="true" [(ngModel)]="learnerLicenseProfesionalTypeId"
+                                                        (ngModelChange)="changeProfessionalVehicleClass()">
+                                                <ion-select-option *ngFor="let item of vehicleClassList"
+                                                                   [value]="item.id">
+                                                    {{item.name}}
+                                                </ion-select-option>
+                                            </ion-select>
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row style=" color: #393939; margin-top: 10px" *ngIf="othersShow">
+                                        <ion-select multiple="true" [(ngModel)]="othersVehicleTypeId"
+                                                    (ngModelChange)="changeOthersProfessionalVehicleClass()"
+                                                    class="input-control"
+                                                    placeholder="নির্বাচন করুন">
+                                            <ion-select-option [value]="vehicle.id"
+                                                               *ngFor="let vehicle of othersVehicleDataList">{{vehicle.name}}</ion-select-option>
+                                        </ion-select>
+                                    </ion-row>
+
+                                </ion-card-content>
+
+                                <ion-card-content class="ion-no-margin ion-no-padding" *ngIf="takeDrivingLicenseNumber">
+                                    <!-- -----------------------------------ONLY FOR MEDIUM AND HEAVY---------------------------------------------- -->
+                                    <ion-row style="margin-top: 10px;" class="ion-rows">
+
+                                        <ion-row class="ion-rows">
+                                            <ion-label>পূর্ববর্তী লাইসেন্স সম্পর্কিত তথ্য</ion-label>
+                                        </ion-row>
+
+                                        <ion-row class="ion-rows">
+                                            <ion-col class="ion-cols" size="5.75">
+                                                <ion-label class="text-size-2">
+                                                    ড্রাইভিং লাইসেন্স নম্বর *
+                                                </ion-label>
+                                                <ion-input class="ion-input-active" [(ngModel)]="licenseNo" autocapitalize="characters"
+                                                           type="text"
+                                                            placeholder="এখানে লিখুন"></ion-input>
+                                            </ion-col>
+                                            <ion-col size=".5">
+
+                                            </ion-col>
+                                            <ion-col class="ion-cols" size="5.75">
+                                                <ion-label class="text-size-2">
+                                                    লাইসেন্সের শ্রেনী *
+                                                </ion-label>
+                                                <ion-select [(ngModel)]="licenseClassId" class="input-control"
+                                                            placeholder="নির্বাচন করুন">
+                                                    <ion-select-option [value]="license"
+                                                                       *ngFor="let license of licenseClassIdArray">{{license}}</ion-select-option>
+                                                </ion-select>
+
+                                            </ion-col>
+                                        </ion-row>
+
+
+                                    </ion-row>
+                                    <ion-row>
+                                        <!--<ion-col  size="12">-->
+                                        <ion-label class="text-size-2">
+                                            ইস্যুর তারিখ *
+                                        </ion-label>
+                                        <ion-datetime [(ngModel)]="dateOfLicenseIssue" [max]="maxIssuedate"
+                                                      displayFormat="DD/MM/YYYY"
+                                                      pickerFormat="DD/MM/YYYY" class="input-control"
+                                                      placeholder="দিন/মাস/বছর"></ion-datetime>
+
+                                    </ion-row>
+
+                                    <ion-row class="ion-rows">
+
+                                        <ion-label class="text-size-2">
+                                            ড্রাইভিং লাইসেন্স রেফারেন্স নম্বর *
+                                        </ion-label>
+                                        <ion-col style="margin: 0; padding: 0;" size="12">
+                                            <ion-input [(ngModel)]="licenseRefNo" autocapitalize="characters"
+                                                       type="text" class="ion-input-active"
+                                                       placeholder="এখানে লিখুন"></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row class="ion-rows">
+                                        <ion-label class="text-size-2">
+                                            ইস্যুকারী কর্তৃপক্ষ *
+                                        </ion-label>
+                                        <ion-select [(ngModel)]="issueAuthorityId" class="input-control"
+                                                    placeholder="নির্বাচন করুন">
+                                            <ion-select-option [value]="authority.id"
+                                                               *ngFor="let authority of issueAuthorityIdArray">{{authority.value}}</ion-select-option>
+                                        </ion-select>
+
+
+                                    </ion-row>
+                                </ion-card-content>
+
+                            </ion-card>
+
+
+                        </div>
+
+
+                        <div [hidden]="slide !== 'Summary'">
+
+                            <ion-card>
+                                <ion-card-content class="ion-margin ion-padding">
+                                    <ion-card-subtitle class="ion-text-center">আবেদনকারীর প্রাথমিক তথ্য
+                                    </ion-card-subtitle>
+                                    <ion-card-title></ion-card-title>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>নাম (ইংরেজী)</ion-text>
+                                            </ion-label>
+                                            <ion-input
+                                                       [readonly]="true">{{nameEng}}</ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>নাম (বাংলা)</ion-text>
+                                            </ion-label>
+                                            <ion-input
+                                                       [readonly]="true">{{nameBn}}</ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>পিতার নাম (ইংরেজী) *</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active"
+                                                       [(ngModel)]="fatherNameEn"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>পিতার নাম (বাংলা)</ion-text>
+                                            </ion-label>
+                                            <ion-input
+                                                       [readonly]="true">{{fatherNameBn}}</ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>মাতার নাম (ইংরেজী) *</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active"
+                                                       [(ngModel)]="motherNameEn"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>মাতার নাম (বাংলা)</ion-text>
+                                            </ion-label>
+                                            <ion-input
+                                                       [readonly]="true">{{motherNameBn}}</ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>স্বামী/স্ত্রীর নাম (ইংরেজী) </ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active"
+                                                       [(ngModel)]="spouseNameEn"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>স্বামী/স্ত্রীর মোবাইল নম্বর</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active"  max="10" type="number" maxlength="10"
+                                                       [(ngModel)]="spousePhoneNo"></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>লিঙ্গ *</ion-text>
+                                            </ion-label>
+                                            <ion-select [(ngModel)]="gender" class="input-control" placeholder="নির্বাচন করুন" [disabled]="nidGenderFound">
+                                                <ion-select-option value="1">MALE</ion-select-option>
+                                                <ion-select-option value="2">FEMALE</ion-select-option>
+                                                <ion-select-option value="3">OTHERS</ion-select-option>
+                                            </ion-select>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>রক্তের গ্রুপ *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions" [(ngModel)]="bloodGroupId" [disabled]="nidBloodGroupFound"
+                                                        placeholder="Select One">
+
+                                                <ion-select-option [value]="group.id"
+                                                                   *ngFor="let group of bloodGroupList">{{group.name}}</ion-select-option>
+                                            </ion-select>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>শিক্ষাগত যোগ্যতা *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions" placeholder="Select One"
+                                                        [(ngModel)]="eduQualificationId">
+                                                <ion-select-option [value]="eduList.id"
+                                                                   *ngFor="let eduList of educationalQualificationList">{{eduList.name}}</ion-select-option>
+
+                                            </ion-select>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>পেশা *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions" placeholder="Select One"
+                                                        [(ngModel)]="singleOccupationID">
+
+                                                <ion-select-option [value]="group.id"
+                                                                   *ngFor="let group of occupationList">{{group.name}}</ion-select-option>
+
+                                            </ion-select>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>বৈবাহিক অবস্থা *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions" [(ngModel)]="maritalId"
+                                                        placeholder="Select One">
+                                                    <ion-select-option [value]="maritalStatus.id"
+                                                                       *ngFor="let maritalStatus of maritualStatusList">{{maritalStatus.name}}</ion-select-option>
+
+                                            </ion-select>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>জাতীয়তা *</ion-text>
+                                            </ion-label>
+                                            <ion-select [(ngModel)]="nationalityId" [interfaceOptions]="customOptions"
+                                                        placeholder="Select One">
+                                                <ion-select-option value="1">BANGLADESHI</ion-select-option>
+                                                <!--<ion-select-option [value]="nation.id"-->
+                                                                   <!--*ngFor="let nation of nationalityList">{{nation.name}}</ion-select-option>-->
+                                            </ion-select>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>দ্বৈত নাগরিক</ion-text>
+                                            </ion-label>
+                                            <ion-row>
+                                                <div [ngClass]="!isDualCitizen? 'radio-selected' : 'radio-unselected'"
+                                                     (click)="changeDualCitizen()">না
+                                                </div>
+                                                <div [ngClass]="isDualCitizen? 'radio-selected' : 'radio-unselected'"
+                                                     (click)="changeDualCitizen()">হ্যাঁ
+                                                </div>
+                                            </ion-row>
+                                        </ion-col>
+                                        <ion-col size="6" *ngIf="isDualCitizen">
+                                            <ion-label>
+                                                <ion-text>দেশ</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions" [(ngModel)]="dualCitizenShipCountry"
+                                                        placeholder="Select One">
+                                                <ion-select-option [value]="nation.id"
+                                                                   *ngFor="let nation of nationalityList">{{nation.name}}</ion-select-option>
+                                            </ion-select>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-card-content>
+                            </ion-card>
+
+                        </div>
+
+
+                        <div *ngIf="slide === 'Payment'">
+
+
+                            <ion-card>
+                                <ion-card-content class="ion-margin ion-padding">
+                                    <ion-card-subtitle class="ion-text-center">ঠিকানা ও যোগাযোগের তথ্য</ion-card-subtitle>
+                                    <ion-card-title></ion-card-title>
+                                    <h3 style="margin-top: 15px; margin-bottom: 5px">আবেদনকারীর যোগাযোগের বিবরণ</h3>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>মোবাইল নম্বর *</ion-text>
+                                            </ion-label>
+                                            <ion-input placeholder="Mobile No" [readonly]="true" [(ngModel)]="applicantMobileNo"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>ফোন নম্বর (অফিস)</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active" placeholder="Office Phone" type="number" [(ngModel)]="applicantMobileNoOffice" ></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>ফোন নম্বর (আবাসিক)</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active" placeholder="Residential Phone" type="number" [(ngModel)]="applicantMobileNoRasidence"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>ই-মেইল</ion-text>
+                                            </ion-label>
+                                            <ion-input  placeholder="email"  [readonly]="true" [(ngModel)]="applicantEmail"></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <h3 style="margin-top: 15px; margin-bottom: 5px">জরুরী যোগাযোগের বিবরণ</h3>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>নাম *</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active" placeholder="Name" [(ngModel)]="emergencyContactName"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>মোবাইল নম্বর *</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active" placeholder="01XXXXXXXXX" type="number" [(ngModel)]="applicantEmergencyContactNo"></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>সম্পর্ক</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-active" placeholder="Relation" [(ngModel)]="applicantRelation"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>ই-মেইল</ion-text>
+                                            </ion-label>
+                                            <ion-input class="ion-input-email" placeholder="email" [(ngModel)]="applicantEmargencyEmail"></ion-input>
+                                        </ion-col>
+                                    </ion-row>
+                                    <h3 style="margin-top: 15px; margin-bottom: 5px">জাতীয় পরিচয়পত্র এর ঠিকানা</h3>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>বর্তমান ঠিকানা *</ion-text>
+                                            </ion-label>
+                                            <div class="border-top">
+                                                <ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>গ্রাম/বাড়ি</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="village" [readonly]="true" [(ngModel)]="nidPresentHome"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>রোড/ব্লক/সেক্টর</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="রোড/ব্লক/সেক্টর" [readonly]="true" [(ngModel)]="nidPresentBlock"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>বিভাগ</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="বিভাগ" [readonly]="true" [(ngModel)]="nidPresentBivag"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>জেলা</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="জেলা" [readonly]="true" [(ngModel)]="nidPresentDistict"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>থানা</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="থানা" [readonly]="true" [(ngModel)]="nidPresentThana"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>পোস্ট কোড</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="পোস্ট কোড" [readonly]="true" [(ngModel)]="nidPresentPostcode"></ion-input>
+                                                    </ion-col>
+                                                </ion-col>
+                                            </div>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>স্থায়ী ঠিকানা *</ion-text>
+                                            </ion-label>
+                                            <div class="border-top">
+                                                <ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>গ্রাম/বাড়ি</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="village" [readonly]="true" [(ngModel)]="nidPermanentHome"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>রোড/ব্লক/সেক্টর</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="রোড/ব্লক/সেক্টর" [readonly]="true" [(ngModel)]="nidPermanentBlock"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>বিভাগ</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="বিভাগ" [readonly]="true" [(ngModel)]="nidPermanentBivag"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>জেলা</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="জেলা" [readonly]="true" [(ngModel)]="nidPermanentDistrict"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>থানা</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="থানা" [readonly]="true" [(ngModel)]="nidPermanentThana"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>পোস্ট কোড</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="পোস্ট কোড" [readonly]="true" [(ngModel)]="nidPermanentPostcode"></ion-input>
+                                                    </ion-col>
+                                                </ion-col>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                    <h3 style="margin-bottom: 5px">বিস্তারিত ঠিকানা *</h3>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>বর্তমান ঠিকানা *</ion-text>
+                                            </ion-label>
+                                            <div class="border-top">
+                                                <ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>গ্রাম/বাড়ি (ইংরেজী)*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input class="ion-input-active" placeholder="village/house in English" [(ngModel)]="presentHome"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>রোড/ব্লক/সেক্টর (ইংরেজী)*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input class="ion-input-active" placeholder="রোড/ব্লক/সেক্টর" [(ngModel)]="presentBlock"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>বিভাগ*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="বিভাগ" [readonly]="true" [(ngModel)]="presentVibag"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>জেলা*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="জেলা" [readonly]="true" [(ngModel)]="presentDistrict"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>থানা*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input placeholder="থানা" [readonly]="true" [(ngModel)]="presentThana"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>পোস্ট কোড (ইংরেজী)*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input class="ion-input-active" placeholder="পোস্ট কোড" type="number" maxlength="4" [(ngModel)]="presentPostcode"></ion-input>
+                                                    </ion-col>
+                                                </ion-col>
+                                            </div>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>স্থায়ী ঠিকানা *</ion-text>
+                                            </ion-label>
+                                            <div class="border-top">
+                                                <ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>গ্রাম/বাড়ি (ইংরেজী)*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input class="ion-input-active" placeholder="village" [(ngModel)]="permanentHome"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>রোড/ব্লক/সেক্টর(ইংরেজী)*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input class="ion-input-active" placeholder="রোড/ব্লক/সেক্টর" [(ngModel)]="permanentBlock"></ion-input>
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>বিভাগ*</ion-text>
+                                                        </ion-label>
+                                                        <ion-select [interfaceOptions]="customOptionsWithReminder" [(ngModel)]="perdivisionId" class="input-control" placeholder="নির্বাচন করুন"
+                                                                    (ngModelChange)="loadParDistrictList($event)">
+                                                            <ion-select-option [value]="pardivision.id"
+                                                                               *ngFor="let pardivision of parDivisionList">{{pardivision.name}}</ion-select-option>
+                                                        </ion-select>
+                                                        <!--<ion-select [interfaceOptions]="customOptions" placeholder="Select One" (ionChange)="loadParDistrictList($event)" [(ngModel)]="permanentVibag">-->
+                                                            <!--<ion-select-option [value]="division.id"-->
+                                                                               <!--*ngFor="let division of pDivisionList">{{division.name}}</ion-select-option>-->
+
+                                                        <!--</ion-select>-->
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>জেলা</ion-text>
+                                                        </ion-label>
+                                                        <ion-select [interfaceOptions]="customOptionsWithReminder" [(ngModel)]="perdistrictId" class="input-control" placeholder="নির্বাচন করুন"
+                                                                    (ngModelChange)="loadParThanaList($event)">
+                                                            <ion-select-option [value]="pardistrict.id"
+                                                                               *ngFor="let pardistrict of parDistrictList">{{pardistrict.name}}</ion-select-option>
+
+                                                        </ion-select>
+                                                        <!--<ion-select [interfaceOptions]="customOptions" placeholder="Select One" [(ngModel)]="permanentDistrict" (ionChange)="loadPThanaList($event)">-->
+                                                            <!--<ion-select-option [value]="pdistrict.id"-->
+                                                                               <!--*ngFor="let pdistrict of pDistrictList">{{pdistrict.name}}</ion-select-option>-->
+                                                        <!--</ion-select>-->
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>থানা</ion-text>
+                                                        </ion-label>
+                                                        <ion-select [interfaceOptions]="customOptionsWithReminder" [(ngModel)]="perthanaId" class="input-control" placeholder="নির্বাচন করুন"  (ionChange)="thanaChange($event)">
+                                                            <ion-select-option [value]="parPStation.id"
+                                                                               *ngFor="let parPStation of parPoliceStationList">{{parPStation.name | uppercase}}</ion-select-option>
+
+                                                        </ion-select>
+                                                        <!--<ion-select [interfaceOptions]="customOptions" placeholder="Select One" [(ngModel)]="permanentThana" (ionChange)="loadExamVanueList($event)">-->
+                                                            <!--<ion-select-option [value]="pPStation.id"-->
+                                                                               <!--*ngFor="let pPStation of pPoliceStationList">{{pPStation.name | uppercase}}</ion-select-option>-->
+                                                        <!--</ion-select>-->
+                                                    </ion-col>
+                                                    <ion-col>
+                                                        <ion-label>
+                                                            <ion-text>পোস্ট কোড (ইংরেজী)*</ion-text>
+                                                        </ion-label>
+                                                        <ion-input class="ion-input-active" placeholder="পোস্ট কোড" type="number" maxlength="4" [(ngModel)]="permanentPostcode"></ion-input>
+                                                    </ion-col>
+                                                </ion-col>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                    <h3 style="margin-bottom: 5px">সার্কেল অফিস ও ভেন্যু</h3>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>সার্কেল অফিস *</ion-text>
+                                            </ion-label>
+                                            <ion-input placeholder="সার্কেল অফিস" readonly="true" [(ngModel)]="cercleOffice"></ion-input>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>পরীক্ষার স্থান *</ion-text>
+                                            </ion-label>
+                                            <ion-select [interfaceOptions]="customOptions" *ngIf="!isExamVenueSingle" [(ngModel)]="examVenue">
+                                                <ion-select-option [value]="examVenueItem.name"
+                                                                   *ngFor="let examVenueItem of examVenueList">{{examVenueItem.name}}</ion-select-option>
+                                            </ion-select>
+                                            <ion-input class="input-control" *ngIf="isExamVenueSingle" [(ngModel)]="examVenue"></ion-input>
+
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-card-content>
+                            </ion-card>
+                        </div>
+
+                        <div *ngIf="slide === 'LastPart'">
+
+                            <ion-card>
+                                <ion-card-content class="ion-margin ">
+                                    <ion-card-subtitle class="ion-text-center">সংযুক্তি এবং কার্ড বিতরণ এর তথ্য</ion-card-subtitle>
+                                    <ion-card-title></ion-card-title>
+                                    <h3 style="margin-top: 15px; margin-bottom: 5px">সংযুক্তি</h3>
+                                    <ion-row>
+                                        <ion-col size="3.5">
+                                            <ion-label>
+                                                <ion-text>মেডিক্যাল সার্টিফিকেট সংযুক্ত করুন *</ion-text>
+                                            </ion-label>
+                                        </ion-col>
+                                        <ion-col size="5.5" align="center">
+                                            <ion-row style="justify-content: end; display: flex">
+                                                <ion-button style="margin: 0;" (click)="browseImageFile('MC')" fill="clear">
+                                                    <ion-icon slot="icon-only" size="large" name="camera"></ion-icon>
+                                                </ion-button>
+                                                <ion-icon  *ngIf="medicalCertificateAttachment != null" style="margin-top: 10px; margin-left: -10px; color: #00FF00" size="mini" name="checkmark" ></ion-icon>
+                                                <ion-button *ngIf="medicalCertificateAttachment != null && mcUploadComplete" style="margin: 0;" (click)="downloadImageAttachment('MC')" fill="clear">
+                                                    <ion-icon slot="icon-only" size="large" name="cloud-download"></ion-icon>
+                                                </ion-button>
+                                            </ion-row>
+                                        </ion-col>
+                                        <ion-col size="3">
+                                            <ion-button style="margin: 0;  color: #FFFFFF" (click)="uploadImage('MC')">Upload</ion-button>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row >
+                                        <ion-col size="3.5">
+                                            <ion-label>
+                                                <ion-text>শিক্ষাগত যোগ্যতার সনদ সংযুক্ত করুন *</ion-text>
+                                            </ion-label>
+                                        </ion-col>
+                                        <ion-col size="5.5" align="center">
+                                            <ion-row style="justify-content: end; display: flex">
+                                                <ion-button style="margin: 0;" (click)="browseImageFile('EDU')" fill="clear">
+                                                    <ion-icon slot="icon-only" size="large" name="camera"></ion-icon>
+                                                </ion-button>
+                                                <ion-icon  *ngIf="educationalCertificateAttachment != null" style="margin-top: 10px; margin-left: -10px; color: #00FF00" size="mini" name="checkmark"></ion-icon>
+                                                <ion-button *ngIf="educationalCertificateAttachment != null && eduUploadComplete" style="margin: 0;" (click)="downloadImageAttachment('EDU')" fill="clear">
+                                                    <ion-icon slot="icon-only" size="large" name="cloud-download"></ion-icon>
+                                                </ion-button>
+                                            </ion-row>
+                                        </ion-col>
+                                        <ion-col size="3">
+                                            <ion-button style="margin: 0;  color: #FFFFFF" (click)="uploadImage('EDU')" >Upload</ion-button>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row >
+                                        <ion-col size="3.5">
+                                            <ion-label>
+                                                <ion-text>ইউটিলিটি বিল সংযুক্ত করুন *</ion-text>
+                                            </ion-label>
+                                        </ion-col>
+                                        <ion-col size="5.5" align="center">
+                                            <ion-row style="justify-content: end; display: flex">
+                                                <ion-button style="margin: 0;" (click)="browseImageFile('UB')" fill="clear">
+                                                    <ion-icon slot="icon-only" size="large" name="camera"></ion-icon>
+                                                </ion-button>
+                                                <ion-icon *ngIf="electricityBillFileAttachment != null" style="margin-top: 10px; margin-left: -10px; color: #00FF00" size="mini" name="checkmark" ></ion-icon>
+                                                <ion-button *ngIf="electricityBillFileAttachment != null && ubUploadComplete" style="margin: 0;" (click)="downloadImageAttachment('UB')" fill="clear">
+                                                    <ion-icon slot="icon-only" size="large" name="cloud-download"></ion-icon>
+                                                </ion-button>
+                                            </ion-row>
+                                        </ion-col>
+                                        <ion-col size="3">
+                                            <ion-button style="margin: 0;  color: #FFFFFF" (click)="uploadImage('UB')" >Upload</ion-button>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="3.5">
+                                            <ion-label>
+                                                <ion-text>জাতীয় পরিচয়পত্র সংযুক্ত করুন *</ion-text>
+                                            </ion-label>
+                                        </ion-col>
+                                        <ion-col size="5.5">
+                                            <ion-row style="justify-content: end; display: flex">
+                                                <ion-button style="margin: 0;" (click)="browseImageFile('NID')" fill="clear">
+                                                    <ion-icon slot="icon-only" size="large" name="camera"></ion-icon>
+                                                </ion-button>
+                                                <ion-icon  *ngIf="nationalIdAttachment != null" style="margin-top: 10px; margin-left: -10px; color: #00FF00" size="mini" name="checkmark"></ion-icon>
+                                                <ion-button *ngIf="nationalIdAttachment != null && nidUploadComplete"  style="margin: 0;" (click)="downloadImageAttachment('NID')" fill="clear">
+                                                    <ion-icon slot="icon-only" size="large" name="cloud-download"></ion-icon>
+                                                </ion-button>
+                                            </ion-row>
+                                            
+                                        </ion-col>
+                                        <ion-col size="3">
+                                            <ion-button style="margin: 0; color: #FFFFFF;" (click)="uploadImage('NID')" >Upload</ion-button>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col size="6">
+                                            <ion-label>
+                                                <ion-text>কার্ড বিতরনের ধরন *</ion-text>
+                                            </ion-label>
+                                        </ion-col>
+                                        <ion-col size="6">
+                                            <ion-select [interfaceOptions]="customOptions" placeholder="Select One" [(ngModel)]="typeOfCardDelivery">
+                                                <ion-select-option value="Y">BY POST</ion-select-option>
+                                                <ion-select-option value="N">CIRCLE OFFICE</ion-select-option>
+                                                <!--<ion-select-option value="3">Others</ion-select-option>-->
+                                            </ion-select>
+                                        </ion-col>
+                                    </ion-row>
+                                    <div *ngIf="typeOfCardDelivery == 'N'">
+                                        <ion-label>
+                                            <ion-text>সার্কেল অফিস *</ion-text>
+                                        </ion-label>
+                                        <ion-input placeholder="সার্কেল অফিস" readonly="true" [(ngModel)]="cercleOffice"></ion-input>
+                                    </div>
+                                    <div style="margin-top: 20px; margin-bottom: 30px" *ngIf="typeOfCardDelivery == 'Y'"> <!-- hidden panel-->
+                                        <h3 style="margin-top: 15px; margin-bottom: 5px">স্মার্ট কার্ড প্রাপ্তির ঠিকানা (ডাকযোগে)</h3>
+                                        <ion-row>
+                                            <ion-col size="6">
+                                                <ion-label>
+                                                    <ion-text>ঠিকানার ধরণ *</ion-text>
+                                                </ion-label>
+                                                <ion-select [interfaceOptions]="customOptions" placeholder="Select One" [(ngModel)]="cardDeliveryAddressType" (ionChange)="changeDeliveryAddress($event)">
+                                                    <ion-select-option value="1">PRESENT</ion-select-option>
+                                                    <ion-select-option value="2">PERMANENT</ion-select-option>
+                                                    <ion-select-option value="3">OTHERS</ion-select-option>
+                                                </ion-select>
+                                            </ion-col>
+                                            <ion-col size="6">
+                                                <ion-label>
+                                                    <ion-text>মোবাইল নম্বর *</ion-text>
+                                                </ion-label>
+                                                <ion-input *ngIf="!othersCardDeliveryActive" class="ion-input-active" [(ngModel)]="othersMobileNo" [disabled]="!othersCardDeliveryActive" placeholder="01XXXXXXXXX" type="number"></ion-input>
+                                                <ion-input *ngIf="othersCardDeliveryActive" class="ion-input-active" [(ngModel)]="othersMobileNo" [disabled]="!othersCardDeliveryActive" placeholder="01XXXXXXXXX" type="number"></ion-input>
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col size="6">
+                                                <ion-label>
+                                                    <ion-text>গ্রাম/বাড়ি *</ion-text>
+                                                </ion-label>
+                                                <ion-input *ngIf="!othersCardDeliveryActive" class="ion-input-inactive" [(ngModel)]="othersHome" [disabled]="!othersCardDeliveryActive"></ion-input>
+                                                <ion-input *ngIf="othersCardDeliveryActive" class="ion-input-active" [(ngModel)]="othersHome" [disabled]="!othersCardDeliveryActive"></ion-input>
+                                            </ion-col>
+                                            <ion-col size="6">
+                                                <ion-label>
+                                                    <ion-text>রোড/ব্লক/সেক্টর *</ion-text>
+                                                </ion-label>
+                                                <ion-input *ngIf="!othersCardDeliveryActive" class="ion-input-inactive" [(ngModel)]="othersBlock" [disabled]="!othersCardDeliveryActive"></ion-input>
+                                                <ion-input *ngIf="othersCardDeliveryActive"class="ion-input-active" [(ngModel)]="othersBlock" [disabled]="!othersCardDeliveryActive"></ion-input>
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col size="6">
+                                                <ion-label>
+                                                    <ion-text>বিভাগ *</ion-text>
+                                                </ion-label>
+                                                <ion-select *ngIf="othersCardDeliveryActive" [interfaceOptions]="customOptions" [(ngModel)]="othersDivisionID" placeholder="Select One" [disabled]="!othersCardDeliveryActive"
+                                                            (ionChange)="loadOthersPermanentDistrictList($event)">
+                                                    <ion-select-option [value]="pardivision.id"
+                                                                       *ngFor="let pardivision of othersParDivisionList">{{pardivision.name}}</ion-select-option>
+                                                </ion-select>
+                                                <ion-input class="input-control" *ngIf="!othersCardDeliveryActive && isPermanet" [disabled]="!othersCardDeliveryActive" [(ngModel)]="othersPerDivision"></ion-input>
+                                                <ion-input class="input-control" *ngIf="!othersCardDeliveryActive && !isPermanet" [disabled]="!othersCardDeliveryActive" [(ngModel)]="othersDivision"></ion-input>
+
+                                            </ion-col>
+                                            <ion-col size="6">
+                                                <ion-label>
+                                                    <ion-text>জেলা *</ion-text>
+                                                </ion-label>
+                                                <ion-select *ngIf="othersCardDeliveryActive" [interfaceOptions]="customOptions" [(ngModel)]="othersDistrictID" placeholder="Select One" [disabled]="!othersCardDeliveryActive"
+                                                            (ionChange)="loadOthersPermanentThanaList($event)">
+                                                    <ion-select-option [value]="pardistrict.id"
+                                                                       *ngFor="let pardistrict of othersParDistrictList">{{pardistrict.name}}</ion-select-option>
+
+                                                </ion-select>
+                                                <ion-input class="input-control" *ngIf="!othersCardDeliveryActive && isPermanet" [disabled]="!othersCardDeliveryActive" [(ngModel)]="othersPerDistrict"></ion-input>
+                                                <ion-input class="input-control" *ngIf="!othersCardDeliveryActive && !isPermanet" [disabled]="!othersCardDeliveryActive" [(ngModel)]="othersDistrict"></ion-input>
+
+
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col size="6">
+                                                <ion-label>
+                                                    <ion-text>থানা *</ion-text>
+                                                </ion-label>
+                                                <ion-select *ngIf="othersCardDeliveryActive" [interfaceOptions]="customOptions" [(ngModel)]="othersThanaID" placeholder="Select One" [disabled]="!othersCardDeliveryActive">
+                                                <ion-select-option [value]="parPStation.id"
+                                                                   *ngFor="let parPStation of othersParThanaList">{{parPStation.name | uppercase}}</ion-select-option>
+
+                                                </ion-select>
+                                                <ion-input class="input-control" *ngIf="!othersCardDeliveryActive && isPermanet" [disabled]="!othersCardDeliveryActive" [(ngModel)]="othersPerThana"></ion-input>
+                                                <ion-input class="input-control" *ngIf="!othersCardDeliveryActive && !isPermanet" [disabled]="!othersCardDeliveryActive" [(ngModel)]="othersThana"></ion-input>
+
+                                            </ion-col>
+                                            <ion-col size="6">
+                                                <ion-label>
+                                                    <ion-text>পোস্ট কোড *</ion-text>
+                                                </ion-label>
+                                                <!--<ion-input class="ion-input-active" [(ngModel)]="othersPerPostCode" [disabled]="!othersCardDeliveryActive && isPermanet"></ion-input>-->
+                                                <ion-input *ngIf="!othersCardDeliveryActive" class="ion-input-inactive" [(ngModel)]="othersPostCode" [disabled]="!othersCardDeliveryActive"></ion-input>
+                                                <ion-input *ngIf="othersCardDeliveryActive" class="ion-input-active" [(ngModel)]="othersPostCode" [disabled]="!othersCardDeliveryActive"></ion-input>
+                                            </ion-col>
+                                        </ion-row>
+                                    </div>
+                                    <ion-text>
+                                        <b>ঘোষণা: </b>আমি এতদ্বারা ঘোষণা করছি যে ফর্মের আবেদনে প্রদত্ত তথ্য সম্পূর্ণ সঠিক । কোনো তথ্য মিথ্যা পাওয়া গেলে কর্তৃপক্ষ কর্তৃক আইনগত ব্যবস্থা নেওয়া হলে আমার কোন আপত্তী থাকবে না ।
+                                    </ion-text>
+                                </ion-card-content>
+                            </ion-card>
+                        </div>
+
+                    </div>
+
+
+                </ion-slide>
+
+            </ng-container>
+
+        </ion-slides>
+
+    </div>
+
+
+    <!--<ion-row class="ion-rows" [ngClass]="saveCanclePart">-->
+    <!--<ion-col class="ion-cols" size="5.75">-->
+    <!--<ion-button (click)="onCancle()" expand="full" type="submit" class="ion-no-margin" color="disabled">-->
+    <!--বাতিল করুন-->
+    <!--</ion-button>-->
+    <!--</ion-col>-->
+    <!--<ion-col size=".5">-->
+
+    <!--</ion-col>-->
+    <!--<ion-col class="ion-cols" size="5.75">-->
+    <!--&lt;!&ndash;&lt;!&ndash;<ion-button class="button-text-4" (click)="formDataValidation()">SAVE</ion-button>&ndash;&gt;&ndash;&gt;-->
+    <!--<ion-button (click)="formDataValidation()" expand="full" type="submit" class="ion-no-margin"-->
+    <!--color="button">সংরক্ষণ করুন-->
+    <!--</ion-button>-->
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+
+    <!--<ion-grid >-->
+    <!--<ion-row style="height: 1px; margin-bottom: 10px"></ion-row>-->
+    <!--<ion-row>-->
+    <!--<ion-col class="ion-text-left ion-cols">-->
+    <!--<ion-button [ngClass]="previousButton" (click)="onPreviousClicked()" expand="full" type="submit"-->
+    <!--class="ion-no-margin" color="disabled">ফিরুন-->
+    <!--</ion-button>-->
+    <!--</ion-col>-->
+    <!--<ion-col size="3"></ion-col>-->
+    <!--<ion-col class="ion-text-right ion-cols">-->
+    <!--<ion-button [ngClass]="nextButton" (click)="onNextClicked()" expand="full" type="submit"-->
+    <!--class="ion-no-margin" color="button">পরবর্তী-->
+    <!--</ion-button>-->
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+    <!--</ion-grid>-->
+
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar>
+        <div class="full-width flex align-items-centers justify-content-space-between">
+
+            <ion-button (click)="onBackButtonTouched()" [style.visibility]="(isBeginning ) ? 'hidden' : ''" expand="full" type="submit" class="ion-margin-start" color="disabled">
+                <span>পূর্ববর্তী</span>
+                <ion-icon slot="start" name="arrow-back" size="medium"></ion-icon>
+            </ion-button>
+
+            <ion-button (click)="onNextButtonTouched()" [style.visibility]="isEnd ? 'hidden' : ''" expand="full" type="submit" class="ion-margin-end" color="button">
+                <span>পরবর্তী</span>
+                <ion-icon slot="end" name="arrow-forward" size="medium"></ion-icon>
+            </ion-button>
+
+            <ion-button [hidden]="!isEnd ? 'hidden' : ''" (click)="finalSubmission()" expand="full" type="submit" class="ion-margin-end" color="success">
+                <span>সাবমিট</span>
+                <ion-icon slot="start" name="paper-plane" size="medium"></ion-icon>
+            </ion-button>
+
+
+            <!--<ion-button style="width: 120px;" strong shape="round" color="dark"
+                        [style.visibility]="(isBeginning || isEnd) ? 'hidden' : ''" (click)="onBackButtonTouched()">
+                <span>Back</span>
+                <ion-icon slot="start" name="chevron-back"></ion-icon>
+            </ion-button>
+            <ion-button style="width: 120px;" strong shape="round" color="primary"
+                        [style.visibility]="isEnd ? 'hidden' : ''" (click)="onNextButtonTouched()">
+                <span>Next</span>
+            </ion-button>
+
+            <ion-button style="width: 120px;" strong shape="round" color="success" [hidden]="!isEnd ? 'hidden' : ''">
+                <span>Submit</span>
+            </ion-button>-->
+
+        </div>
+    </ion-toolbar>
+</ion-footer>

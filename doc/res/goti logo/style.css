@@ -1,0 +1,104 @@
+@keyframes rotate-left {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes rotate-right {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes hover {
+    0% {
+        -webkit-transform: translateY(0%);
+    }
+    50% {
+        -webkit-transform: translateY(5%);
+    }
+    100% {
+        -webkit-transform: translateY(0%);
+    }
+}
+
+@keyframes pull {
+    0% {
+        -webkit-transform: scaleY(1);
+    }
+    40% {
+        -webkit-transform: scaleY(1.01);
+    }
+    60% {
+        -webkit-transform: scaleY(0.99);
+    }
+    80% {
+        -webkit-transform: scaleY(1.01);
+    }
+    100% {
+        -webkit-transform: scaleY(0.99);
+    }
+    80% {
+        -webkit-transform: scaleY(1.01);
+    }
+    100% {
+        -webkit-transform: scaleY(1);
+    }
+}
+
+.around, .cls-4, .cls-5, .cls-6, .cls-7,.cls-8, .cls-9, .cls-10, .cls-11,.cls-12,
+.cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19,
+.cls-20, .cls-21, .cls-22, .cls-23,  .cls-27{
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transform-origin: 50% 50%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation: rotate-left 60s linear 1s infinite;
+}
+
+.cloud-1 {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transform-origin: 50% 50%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation: hover 3s linear 1s infinite;
+}
+
+.cloud-2 {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transform-origin: 50% 50%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation: hover 4s linear 2s infinite;
+}
+
+.vehicle-1 {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transform-origin: 50% 50%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation: rotate-left 10s linear 1s infinite;
+}
+
+.vehicle-2 {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transform-origin: 50% 50%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation: rotate-left 15s linear 1s infinite;
+}
+
+.vehicle-3 {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transform-origin: 50% 50%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation: rotate-left 20s linear 1s infinite;
+}
+
+.cls-1{
+    /*fill: #d93728;
+    stroke: #d93728;*/
+}
+
+

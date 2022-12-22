@@ -1,0 +1,30 @@
+[
+      {
+        "SLIDE_ID": "1",
+        "ICON_ID": "26",
+        "SLIDE_SN": "1",
+        "SLIDE_CONTENT": "Slide 1",
+        "ENABLED": "Y",
+        "SLIDE_TYPE" : "HTML",
+        "AUTO_RUN": "Y", 
+      },
+      {
+        "SLIDE_ID": "2",
+        "ICON_ID": "26",
+        "SLIDE_SN": "2",
+        "SLIDE_CONTENT": "Slide 2",
+        "ENABLED": "Y",
+        "SLIDE_TYPE" : "HTML",
+        "AUTO_RUN": "Y"
+      },
+      {
+        "SLIDE_ID": "3",
+        "ICON_ID": "26",
+        "SLIDE_SN": "3",
+        "SLIDE_CONTENT": "Slide 3",
+        "ENABLED": "Y",
+        "SLIDE_TYPE" : "HTML",
+        "AUTO_RUN": "Y"
+      }
+
+    ];

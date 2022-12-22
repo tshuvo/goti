@@ -1,0 +1,125 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text color="light" class="fw700">টিআইএন তথ্য</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+    <ion-grid style="border: 1px solid #ccc; margin: 50px 10px 20px 10px; background-color: #fff;">
+
+        <ion-grid style="margin: 0px 5px 0px 5px;">
+
+            <ion-row class="ion-rows">
+                <ion-col class="ion-cols" size="12">
+                    <ion-label class="text-size-2">
+                        টিআইএন নম্বর
+                    </ion-label>
+                    <ion-item class="tin-search-box" lines="none">
+                        <ion-input [readonly]="tinFieldStatus" type="number" placeholder="অনুসন্ধান করুন" [(ngModel)]="tinNo"></ion-input>
+                        <ion-icon *ngIf="!tinFieldStatus" (click)="onSearchTinNumber()" name="search"></ion-icon>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-rows">
+                <ion-col class="ion-cols" size="12">
+                    <ion-label style="font-size: 11px;">
+                        টিআইএন ব্যক্তি / সংস্থার নাম
+                    </ion-label>
+                    <ion-input readonly="true" class="input-control_upper_case" [(ngModel)]="tinName"></ion-input>
+                </ion-col>
+                <!-- <ion-col size=".5"> </ion-col>
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-label class="text-size-2">
+                        টিআইএন নম্বর
+                    </ion-label>
+                    <ion-input type="number" class="input-control" placeholder="এখানে লিখুন" [(ngModel)]="tinNo"></ion-input>
+                </ion-col> -->
+            </ion-row>
+
+            <ion-row class="ion-rows">
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-label class="text-size-2">
+                        জেলা
+                    </ion-label>
+                    <ion-input readonly="true" class="input-control_upper_case" [(ngModel)]="tinDistrictName"></ion-input>
+                   <!-- <ion-select class="input-control" [(ngModel)]="tinDistrict" placeholder="নির্বাচন করুন">
+                        <ion-select-option *ngFor="let district of tinDistrictList" value="{{district.id}}">{{district.name}}</ion-select-option>
+                    </ion-select> -->
+                </ion-col>
+                <ion-col size=".5"></ion-col>
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-label class="text-size-2">
+                        ঠিকানা
+                    </ion-label>
+                    <ion-input class="input-control_upper_case" placeholder="এখানে লিখুন" [(ngModel)]="tinAddress"></ion-input>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-rows">
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-label class="text-size-2">
+                        টিআইএন সার্কেল
+                    </ion-label>
+                    <ion-input readonly="true" class="input-control" [(ngModel)]="tinCircleName"></ion-input>
+                </ion-col>
+                <ion-col size=".5"></ion-col>
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-label class="text-size-2">
+                        টিআইএন জোন
+                    </ion-label>
+                    <ion-input readonly="true" class="input-control" [(ngModel)]="tinZoneName"></ion-input>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-rows">
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-label class="text-size-2">
+                        টিআইএন টাইপ
+                    </ion-label>
+                    <ion-input readonly="true" class="input-control" [(ngModel)]="tinTypeName"></ion-input>
+                    <!-- <ion-select class="input-control" [(ngModel)]="tinType" placeholder="নির্বাচন করুন">
+                        <ion-select-option *ngFor="let type of tinTypeList" value="{{type.id}}">{{type.name}}</ion-select-option>
+                    </ion-select> -->
+                </ion-col>
+                <ion-col size=".5">
+
+                </ion-col>
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-label class="text-size-2">
+                        মোবাইল নাম্বার
+                    </ion-label>
+                    <ion-input type="number" class="input-control" placeholder="এখানে লিখুন" [(ngModel)]="tinTelephoneNo"></ion-input>
+                </ion-col>
+            </ion-row>
+
+            <ion-row style="height: 1px; background-color: #fff; margin-top: 10px; margin-bottom: 10px;"></ion-row>
+
+            <ion-row class="ion-rows">
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-button class="button-text" color="disabled" (click)="descardTransaction()">বাতিল করুন</ion-button>
+                </ion-col>
+                <ion-col size=".5">
+
+                </ion-col>
+                <ion-col class="ion-cols" size="5.75">
+                    <ion-button class="button-text-2" color="button" (click)="checkTin()">এগিয়ে যান</ion-button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    </ion-grid>
+
+</ion-content>

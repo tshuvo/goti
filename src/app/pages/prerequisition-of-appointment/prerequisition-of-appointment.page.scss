@@ -1,0 +1,53 @@
+ion-app {
+  --ion-background-color: #EBEDEA;
+}
+
+.headers {
+  color: #fff;
+  padding: 20px;
+  font-size: 18px;
+  background-color: #2A3F54;
+}
+
+.grids {
+  margin: 20px 10px 10px 10px;
+  border: 1px solid #ccc;
+  background-color: #fff
+}
+
+.lbl {
+  line-height: 1.42857143;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.button-text {
+  border-radius: 0px;
+  width: 50%;
+  height: 30px;
+  text-transform: none;
+  --ion-color-primary: #683091;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #fff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}
+
+.button-text-2 {
+  border-radius: 0px;
+  width: 40%;
+  height: 30px;
+  text-transform: none;
+  --ion-color-primary: #37AB2F;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #fff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}
+
+.no-padding-margin {
+  padding: 0;
+  margin: 0;
+}

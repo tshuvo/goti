@@ -1,0 +1,979 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="ion-cols ion-text-center">
+            <ion-text color="light" class="ion-text-wrap">
+                <ion-text color="light" class="fw700 ion-text-wrap">শিক্ষানবিশ লাইসেন্সের আবেদন</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <!--<ion-button size="small" shape="round" color="medium" routerLink="/home">
+              <ion-icon color="white" name="home" class="header_button_r"></ion-icon>
+            </ion-button>-->
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid *ngIf="showNidOption">
+        <ion-row style="margin-left: 20px; margin-top: 10px">
+            <ion-col class="ion-no-margin ion-no-padding">
+                <ion-text style="font-size: small">জাতীয় পরিচয়পত্র নম্বর</ion-text>
+                <!--<ion-input class="input-control-nid" type="text" [(ngModel)]="nidForNid" placeholder="এন আই ডি লিখুন"></ion-input>-->
+            </ion-col>
+            <ion-col size="0.5"></ion-col>
+            <ion-col class="ion-no-margin ion-no-padding">
+                <ion-text style="font-size: small">জন্ম তারিখ</ion-text>
+                <!--<ion-datetime [(ngModel)]="nidDateOfBirth" displayFormat="DD/MM/YYYY"-->
+                              <!--class="input-control" placeholder="দিন/মাস/বছর"></ion-datetime>-->
+            </ion-col>
+        </ion-row>
+        <ion-row id="nid-contant">
+            <ion-col class="ion-no-margin ion-no-padding">
+                <ion-input class="input-control-nid" style="--placeholder-color: #129" type="text" [(ngModel)]="nidForNid" placeholder="এন আই ডি লিখুন"></ion-input>
+            </ion-col>
+            <ion-col size="0.5"></ion-col>
+            <ion-col class="ion-no-margin ion-no-padding" >
+                <ion-datetime style="--placeholder-color: #4f6a99" [(ngModel)]="nidDateOfBirth" displayFormat="DD/MM/YYYY"
+                              class="input-control" placeholder="দিন/মাস/বছর"></ion-datetime>
+            </ion-col>
+        </ion-row>
+        <ion-button color="button" expand="block" (click)="checkNidOption()">এগিয়ে যান</ion-button>
+    </ion-grid>
+
+    <ion-grid style="margin: 20px;" *ngIf="!showNidOption">
+
+            <ion-row class="ion-rows">
+                <ion-col size=".5"></ion-col>
+                <ion-col class="ion-cols" size="5.25">
+                    <ion-button [ngClass]="bgBtnNonProfessional" (click)="onLicenseTypeClick('1')">অপেশাদার</ion-button>
+                </ion-col>
+                <ion-col size=".5"></ion-col>
+                <ion-col class="ion-cols" size="5.25">
+                    <ion-button [ngClass]="bgBtnProfessional" (click)="onLicenseTypeClick('2')">পেশাদার</ion-button>
+                </ion-col>
+                <ion-col size=".5"></ion-col>
+            </ion-row>
+
+            <ion-row style="height: 1px; margin-top: 10px; margin-bottom: 10px;"></ion-row>
+
+            <ion-row>
+                <ion-col class="ion-text-center">
+                    <ion-avatar>
+                        <ion-img *ngIf="uploadPhoto" src={{uploadPhoto}} (click)="browseImageFile('user')"></ion-img>
+                        <ion-img *ngIf="!uploadPhoto" src="/assets/icon/profile.png"
+                                 (click)="browseImageFile('user')"></ion-img>
+                    </ion-avatar>
+                </ion-col>
+            </ion-row>
+
+            <ion-row style="margin-top: 10px;">
+                <ion-col style="font-size: 12px;" class="ion-cols row-divider ion-text-center">
+                    <ion-label>* ছবি পরিবর্তনের জন্য ছবির উপর ক্লিক করুন</ion-label>
+                    <br>
+                    <ion-label>ছবির সাইজ সর্বোচ্চ ১৫০ কেবি (৩০০ x ৩০০ পিক্সেল)</ion-label>
+                </ion-col>
+            </ion-row>
+
+            <ion-row style="height: 1px; margin-top: 15px; margin-bottom: 20px;"></ion-row>
+
+            <!-- ----------------------------------FIRST PART OF LEARNER FORM ONLY GENERAL INFORMATION------------------------------------- -->
+            <ion-grid [ngClass]="firstPart" class="ion-cols">
+
+                <!--<ion-row>
+                  <ion-label class="row-divider"><u>সেকশন এ</u></ion-label>
+                </ion-row>-->
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            জাতীয় পরিচয়পত্র *
+                        </ion-label>
+                        <ion-input [readonly]="doReadOnly" [(ngModel)]="nationalId" class="input-control" type="number"
+                                   placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            জন্ম তারিখ *
+                        </ion-label>
+                        <ion-input readonly ="true" [(ngModel)]="dateOfBirth"
+                                      class="input-control" ></ion-input>
+
+                        <!--<ion-datetime [readonly]="doReadOnly" [(ngModel)]="dateOfBirth" displayFormat="DD/MM/YYYY"-->
+                                      <!--class="input-control" placeholder="দিন/মাস/বছর"></ion-datetime>-->
+                        <!--<ion-datetime class="dob" (ionChange)="updateDate($event)" displayFormat="D-M-YYYY" pickerFormat="D-M-YYYY"  placeholder="Date of Birth" ></ion-datetime>-->
+                    </ion-col>
+                    <ion-label class="text-size-smalls">বিঃ দ্রঃ ১৩ সংখ্যার জাতীয় পরিচয়পত্র নম্বর এর আগে আবেদনকারীর জন্ম সাল
+                        যোগ করুন
+                    </ion-label>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            নাম (ইংরেজী) *
+                        </ion-label>
+                        <ion-input [readonly]="doReadOnly" [(ngModel)]="enguserName" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            বৈবাহিক অবস্থা
+                        </ion-label>
+                        <ion-select [(ngModel)]="maritalId" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="maritalStatus.id"
+                                               *ngFor="let maritalStatus of maritualStatusList">{{maritalStatus.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            পিতার নাম (ইংরেজী) *
+                        </ion-label>
+                        <ion-input [(ngModel)]="engFatherName" autocapitalize="characters" class="input-control_upper_case" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            রক্তের গ্রুপ *
+                        </ion-label>
+                        <ion-select [(ngModel)]="bloodGroupId" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="group.id"
+                                               *ngFor="let group of bloodGroupList">{{group.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            মাতার নাম (ইংরেজী) *
+                        </ion-label>
+                        <ion-input [(ngModel)]="engMotherName" autocapitalize="characters" class="input-control_upper_case" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            লিঙ্গগত পরিচয় *
+                        </ion-label>
+                        <ion-select [(ngModel)]="gender" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option value="1">Male</ion-select-option>
+                            <ion-select-option value="2">Female</ion-select-option>
+                            <ion-select-option value="3">Others</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            স্বামী/স্ত্রীর নাম (ইংরেজী)
+                        </ion-label>
+                        <ion-input [(ngModel)]="engSpouseName" autocapitalize="characters" class="input-control_upper_case" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            পেশা *
+                        </ion-label>
+                        <ion-select [(ngModel)]="singleOccupationID" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="group.id"
+                                               *ngFor="let group of occupationList">{{group.name}}</ion-select-option>
+                        </ion-select>
+                        <!--<ion-input [(ngModel)]="occupation" autocapitalize="characters" class="input-control_upper_case" placeholder="এখানে লিখুন"></ion-input>-->
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            শিক্ষাগত যোগ্যতা *
+                        </ion-label>
+                        <ion-select [(ngModel)]="eduQualificationId" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="eduList.id"
+                                               *ngFor="let eduList of educationalQualificationList">{{eduList.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols ion-text-center" size="5.75">
+                        <!--<ion-label class="text-size">-->
+                        <!--শিক্ষা সনদপত্র সংযুক্ত করুন-->
+                        <!--</ion-label>-->
+                        <!--<ion-button (click)="browseImageFile('EC')" class="button-text-6">ব্রাউজ করুন</ion-button>-->
+                        <!--&lt;!&ndash;<ion-img *ngIf="isEducationCirtificateUpload" src= "../../../assets/icon/image_upload.svg" style="width: 5px;"></ion-img>&ndash;&gt;-->
+                        <!--<ion-icon class="ion-text-center" id="education-certificate-check-mark"-->
+                        <!--*ngIf="isEducationCirtificateUpload" name="checkmark-circle"></ion-icon>-->
+                    </ion-col>
+                    <!--<ion-col size="4" class="ion-cols" *ngIf="isEducationCirtificateUpload">-->
+                    <!--<ion-col size="4" class="ion-cols">-->
+                    <!--<ion-img src= "../../../assets/icon/add.jpg"></ion-img>-->
+                    <!--</ion-col>-->
+                </ion-row>
+
+            </ion-grid>
+
+            <!--<ion-row style="height: 1px; background-color: #fff"></ion-row>-->
+
+            <!-- ----------------------------------SECOND PART OF LEARNER FORM ONLY ADDRESS INFORMATION------------------------------------- -->
+            <ion-grid [ngClass]="secondPart" class="ion-cols">
+
+                <ion-row>
+                    <ion-col size="6">
+                        <ion-label class="row-divider"><u>বর্তমান ঠিকানা *</u></ion-label>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-label class="row-divider"><u>স্থায়ী ঠিকানা *</u></ion-label>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size="6">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="6">
+                        <ion-row>
+                            <ion-checkbox [(ngModel)]="sameAsPresent" [checked]="addressCheckBox()"
+                                          style="height: 15px; width: 15px;"></ion-checkbox>
+                            <ion-label style="margin-left: 5px; font-size: 10px; color: #393939; text-align: center">বর্তমান
+                                এবং স্থায়ী ঠিকানা একই
+                            </ion-label>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            গ্রাম/বাড়ি *
+                        </ion-label>
+                        <ion-input [(ngModel)]="pVillage" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col *ngIf="!sameAsPresent" class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            গ্রাম/বাড়ি
+                        </ion-label>
+                        <ion-input [(ngModel)]="parVillage" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            রোড/ব্লক/সেক্টর *
+                        </ion-label>
+                        <ion-input [(ngModel)]="pRoad" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col *ngIf="!sameAsPresent" class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            রোড/ব্লক/সেক্টর
+                        </ion-label>
+                        <ion-input [(ngModel)]="parRoad" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            বিভাগ *
+                        </ion-label>
+                        <ion-select [(ngModel)]="pdivisionId" class="input-control" placeholder="নির্বাচন করুন"
+                                    (ionChange)="loadPDistrictList($event)">
+                            <ion-select-option [value]="division.id"
+                                               *ngFor="let division of pDivisionList">{{division.name}}</ion-select-option>
+
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col *ngIf="!sameAsPresent" class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            বিভাগ
+                        </ion-label>
+                        <ion-select [(ngModel)]="perdivisionId" class="input-control" placeholder="নির্বাচন করুন"
+                                    (ionChange)="loadParDistrictList($event)">
+                            <ion-select-option [value]="pardivision.id"
+                                               *ngFor="let pardivision of parDivisionList">{{pardivision.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            জেলা *
+                        </ion-label>
+                        <ion-select [(ngModel)]="pdistrictId" class="input-control" placeholder="নির্বাচন করুন"
+                                    (ionChange)="loadPThanaList($event)">
+                            <ion-select-option [value]="pdistrict.id"
+                                               *ngFor="let pdistrict of pDistrictList">{{pdistrict.name}}</ion-select-option>
+
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col *ngIf="!sameAsPresent" class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            জেলা
+                        </ion-label>
+                        <ion-select [(ngModel)]="perdistrictId" class="input-control" placeholder="নির্বাচন করুন"
+                                    (ionChange)="loadParThanaList($event)">
+                            <ion-select-option [value]="pardistrict.id"
+                                               *ngFor="let pardistrict of parDistrictList">{{pardistrict.name}}</ion-select-option>
+
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            থানা *
+                        </ion-label>
+                        <ion-select [(ngModel)]="pthanaId" class="input-control" placeholder="নির্বাচন করুন"
+                                    (ionChange)="loadExamVanueList($event)">
+                            <ion-select-option [value]="pPStation.id"
+                                               *ngFor="let pPStation of pPoliceStationList">{{pPStation.name | uppercase}}</ion-select-option>
+
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col *ngIf="!sameAsPresent" class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            থানা
+                        </ion-label>
+                        <ion-select [(ngModel)]="perthanaId" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="parPStation.id"
+                                               *ngFor="let parPStation of parPoliceStationList">{{parPStation.name | uppercase}}</ion-select-option>
+
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            পোস্ট কোড
+                        </ion-label>
+                        <ion-input [(ngModel)]="pPostCode" type="number" class="input-control"
+                                   placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col *ngIf="!sameAsPresent" class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            পোস্ট কোড
+                        </ion-label>
+                        <ion-input [(ngModel)]="perPostCode" type="number" class="input-control"
+                                   placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            জাতীয়তা *
+                        </ion-label>
+                        <ion-select [(ngModel)]="nationalityId" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="nation.id"
+                                               *ngFor="let nation of nationalityList">{{nation.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            দ্বৈত নাগরিক *
+                        </ion-label>
+
+                        <ion-item lines="none">
+                            <ion-checkbox [(ngModel)]="chkBoxNo" (click)="onDualCitizenShip('1')"></ion-checkbox>
+                            <ion-label class="ion-text-center">না</ion-label>
+
+                            <ion-checkbox [(ngModel)]="chkBoxYes" (click)="onDualCitizenShip('2')"></ion-checkbox>
+                            <ion-label class="ion-text-center">হ্যাঁ</ion-label>
+                        </ion-item>
+
+                        <!--   <ion-row>
+                             <ion-checkbox style="height: 15px; width: 15px;"></ion-checkbox>
+                             <ion-label style="margin-left: 5px; font-size: 10px; color: #393939; text-align: center">না</ion-label>
+                           </ion-row>
+
+                           <ion-row>
+                             <ion-checkbox style="height: 15px; width: 15px;"></ion-checkbox>
+                             <ion-label style="margin-left: 5px; font-size: 10px; color: #393939; text-align: center">হ্যাঁ</ion-label>
+                           </ion-row>-->
+
+                        <!--<ion-row>
+                          <ion-col class="ion-cols" size="6">
+                            <ion-button class="ion-cols" [ngClass]="bgBtnNo" (click)="onLicenseTypeClick('3')">না</ion-button>
+                          </ion-col>
+                          <ion-col class="ion-cols" size="6">
+                            <ion-button class="ion-cols" [ngClass]="bgBtnYes" (click)="onLicenseTypeClick('4')">হ্যাঁ</ion-button>
+                          </ion-col>
+                        </ion-row>-->
+
+                    </ion-col>
+                </ion-row>
+
+                <ion-row [ngClass]="dualCitizenShipRow" class="ion-cols">
+                    <ion-col size="3"></ion-col>
+                    <ion-col class="ion-cols" size="6">
+                        <ion-label class="text-size-2">
+                            দেশ *
+                        </ion-label>
+                        <ion-select [(ngModel)]="dualCitizenShipCountry" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="nation.id"
+                                               *ngFor="let nation of nationalityList">{{nation.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                    <ion-col size="3"></ion-col>
+                </ion-row>
+
+            </ion-grid>
+
+            <!--<ion-row style="height: 1px; background-color: #fff"></ion-row>-->
+
+            <!-- ----------------------------------THIRD PART OF LEARNER FORM ONLY CONTRACT INFORMATION------------------------------------- -->
+            <ion-grid [ngClass]="thirdPart" class="ion-cols">
+
+                <ion-row style="margin-top: 30px;">
+                    <ion-col size="6">
+                        <ion-label class="row-divider"><u>আবেদনকারীর যোগাযোগের বিবরণ</u></ion-label>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-label class="row-divider"><u>জরুরী যোগাযোগের বিবরণ</u></ion-label>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size">
+                            ফোন নম্বর (আবাসিক)
+                        </ion-label>
+                        <ion-input [(ngModel)]="phNoRes" type="number" class="input-control"
+                                   placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            নাম *
+                        </ion-label>
+                        <ion-input [(ngModel)]="emergencyName" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            মোবাইল নম্বর *
+                        </ion-label>
+                        <ion-input [(ngModel)]="phNocell" type="number" class="input-control"
+                                   placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            সম্পর্ক
+                        </ion-label>
+                        <ion-input [(ngModel)]="relationship" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            ফোন নম্বর (অফিস)
+                        </ion-label>
+                        <ion-input [(ngModel)]="phNoOffice" type="number" class="input-control"
+                                   placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            মোবাইল নম্বর *
+                        </ion-label>
+                        <ion-input [(ngModel)]="emergPercontactNo" type="number" class="input-control"
+                                   placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            ইমেল
+                        </ion-label>
+                        <ion-input [(ngModel)]="email" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            ইমেল
+                        </ion-label>
+                        <ion-input [(ngModel)]="emergPerMail" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+
+            <!--<ion-row style="height: 1px; background-color: #fff; margin-top: 30px;"></ion-row>-->
+
+            <!-- ----------------------------------FOURTH PART OF LEARNER FORM ONLY SECTION B INFORMATION------------------------------------- -->
+            <ion-grid [ngClass]="fourthPart" class="ion-cols">
+
+                <!--<ion-row style="margin-top: 10px;">
+                  <ion-label class="row-divider"><u>সেকশন বি</u></ion-label>
+                </ion-row>-->
+
+                <ion-row class="ion-rows">
+                    <ion-label>শিক্ষানবিশ লাইসেন্স ইস্যুর জন্য</ion-label>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label style="font-size: 9px;">
+                            প্রশিক্ষক এর ড্রাইভিং লাইসেন্স নম্বর
+                        </ion-label>
+                        <ion-input [(ngModel)]="instructorLicenseNo" type="text" class="input-control"
+                                   placeholder="এখানে লিখুন"></ion-input>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-label class="text-size-2">
+                            পরীক্ষার স্থান *
+                        </ion-label>
+                        <ion-select *ngIf="!isExamVenueSingle" [(ngModel)]="examVenue" class="input-control"
+                                    placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="examVenueItem.name"
+                                               *ngFor="let examVenueItem of examVenueList">{{examVenueItem.name}}</ion-select-option>
+                        </ion-select>
+                        <!--<ion-input class="input-control" *ngIf="isExamVenueSingle" [(ngModel)] ="examVenue" [value]="examVenueList[0].name">{{examVenueList[0].name}}</ion-input>-->
+                        <!--<ion-input class="input-control" *ngIf="isExamVenueSingle" [(ngModel)] ="examVenue" [value]="examVenueList[0].name">{{examVenueList[0].name}}</ion-input>-->
+                        <ion-input class="input-control" *ngIf="isExamVenueSingle" [(ngModel)]="examVenue"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+
+
+                <ion-row style="margin-top: 15px; color: #393939;">
+
+                    <ion-label class="text-size-2">মোটরযানের শ্রেণী *</ion-label>
+                </ion-row>
+
+                <!--<ion-row style="margin-top: 15px;" class="ion-rows">-->
+                <!--<ion-checkbox></ion-checkbox>-->
+                <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                <!--MOTORCYCLE-->
+                <!--</ion-label>-->
+                <!--</ion-row>-->
+
+                <!--<ion-row style="margin-top: 15px;" class="ion-rows">-->
+                <!--<ion-checkbox></ion-checkbox>-->
+                <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                <!--LIGHT-->
+                <!--</ion-label>-->
+                <!--</ion-row>-->
+
+                <!--<ion-row>-->
+                <!--<ion-select [(ngModel)] ="vehicleId" class="input-control" placeholder="Select One" >-->
+                <!--<ion-select-option  [value]="vehicle.id" *ngFor="let vehicle of vehicleClassList" >{{vehicle.name}}</ion-select-option>-->
+                <!--</ion-select>-->
+                <!--</ion-row>-->
+
+                <!-- --------------------VEHICLE CLASS GRID FOR NONPROFESSIONAL-------------------------------- -->
+                <ion-grid [ngClass]="nonProfessionalGrid">
+                    <!--<ion-row style="margin-top: 15px;" class="ion-rows" *ngFor="let vehicle of vehicleClassList"  >-->
+                    <!--<ion-checkbox [value]="vehicle.id"></ion-checkbox>-->
+                    <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                    <!--{{vehicle.name}}-->
+                    <!--</ion-label>-->
+                    <!--</ion-row>-->
+
+                    <ion-row style="margin-top: 15px;" class="ion-rows">
+                        <ion-checkbox [(ngModel)]="learnerLicenseNonProfesionalLight"
+                                      (ionChange)="chooseVehicleClassTypeProfessional( $event,'3')"></ion-checkbox>
+                        <ion-label style="margin-left: 10px;" class="text-size-2">
+                            LIGHT
+                        </ion-label>
+                    </ion-row>
+
+                    <ion-row style="margin-top: 15px;" class="ion-rows">
+                        <ion-checkbox [(ngModel)]="learnerLicenseNonProfesionalMotorCycle"
+                                      (ionChange)="chooseVehicleClassTypeProfessional( $event, '4')"></ion-checkbox>
+                        <ion-label style="margin-left: 10px;" class="text-size-2">
+                            MOTORCYCLE
+                        </ion-label>
+                    </ion-row>
+                </ion-grid>
+
+                <ion-grid [ngClass]="professionalGrid">
+                    <ion-row style=" color: #393939;">
+                        <ion-select multiple="true" [(ngModel)]="learnerLicenseProfesionalTypeId"
+                                    (ngModelChange)="changeProfessionalVehicleClass()" class="input-control"
+                                    placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="vehicle.id"
+                                               *ngFor="let vehicle of vehicleClassList">{{vehicle.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-row>
+
+                    <ion-row style=" color: #393939; margin-top: 10px" *ngIf="othersShow">
+                        <ion-select multiple="true" [(ngModel)]="othersVehicleTypeId"
+                                    (ngModelChange)="changeOthersProfessionalVehicleClass()" class="input-control"
+                                    placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="vehicle.id"
+                                               *ngFor="let vehicle of othersVehicleDataList">{{vehicle.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-row>
+
+                    <!--<ion-row style="margin-top: 15px;" class="ion-rows">-->
+                    <!--<ion-checkbox></ion-checkbox>-->
+                    <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                    <!--LIGHT-->
+                    <!--</ion-label>-->
+                    <!--</ion-row>-->
+                    <!-- -----------------------------------ONLY FOR MEDIUM AND HEAVY---------------------------------------------- -->
+                    <ion-row style="margin-top: 10px;" class="ion-rows" *ngIf="takeDrivingLicenseNumber">
+
+                        <!--<ion-col size="2"></ion-col>-->
+                        <!--<ion-col class="ion-cols" >-->
+                        <!--<ion-label class="text-size-2">-->
+                        <!--আপনার ড্রাইভিং লাইসেন্স নম্বর-->
+                        <!--</ion-label>-->
+                        <!--<ion-input [(ngModel)]="licenseNo" type="number" class="input-control" placeholder="এখানে লিখুন"></ion-input>-->
+                        <!--</ion-col>-->
+                        <!--<ion-col size="2"></ion-col>-->
+
+                        <ion-row class="ion-rows">
+                            <ion-label>পূর্ববর্তী লাইসেন্স সম্পর্কিত তথ্য</ion-label>
+                        </ion-row>
+
+                        <ion-row class="ion-rows">
+                            <ion-col class="ion-cols" size="5.75">
+                                <ion-label class="text-size-2">
+                                    ড্রাইভিং লাইসেন্স নম্বর *
+                                </ion-label>
+                                <ion-input [(ngModel)]="licenseNo" autocapitalize="characters" type="text"
+                                           class="input-control" placeholder="এখানে লিখুন"></ion-input>
+                            </ion-col>
+                            <ion-col size=".5">
+
+                            </ion-col>
+                            <ion-col class="ion-cols" size="5.75">
+                                <ion-label class="text-size-2">
+                                    লাইসেন্সের শ্রেনী *
+                                </ion-label>
+                                <ion-select [(ngModel)]="licenseClassId" class="input-control" placeholder="নির্বাচন করুন">
+                                    <ion-select-option [value]="license"
+                                                       *ngFor="let license of licenseClassIdArray">{{license}}</ion-select-option>
+                                </ion-select>
+                                <!--<ion-input class="input-control" *ngIf="isExamVenueSingle" [(ngModel)] ="examVenue" [value]="examVenueList[0].name">{{examVenueList[0].name}}</ion-input>-->
+                                <!--<ion-input class="input-control" *ngIf="isExamVenueSingle" [(ngModel)] ="examVenue" [value]="examVenueList[0].name">{{examVenueList[0].name}}</ion-input>-->
+
+                            </ion-col>
+                        </ion-row>
+
+
+                    </ion-row>
+                    <ion-row *ngIf="takeDrivingLicenseNumber">
+                        <!--<ion-col  size="12">-->
+                        <ion-label class="text-size-2">
+                            ইস্যুর তারিখ *
+                        </ion-label>
+                        <ion-datetime [(ngModel)]="dateOfLicenseIssue" [max]="maxIssuedate" displayFormat="DD/MM/YYYY"
+                                      pickerFormat="DD/MM/YYYY" class="input-control"
+                                      placeholder="দিন/মাস/বছর"></ion-datetime>
+                        <!--<ion-datetime class="dob" (ionChange)="updateDate($event)" displayFormat="D-M-YYYY" pickerFormat="D-M-YYYY"  placeholder="Date of Birth" ></ion-datetime>-->
+                        <!--</ion-col>-->
+                    </ion-row>
+
+                    <ion-row class="ion-rows" *ngIf="takeDrivingLicenseNumber">
+
+                        <ion-label class="text-size-2">
+                            ড্রাইভিং লাইসেন্স রেফারেন্স নম্বর *
+                        </ion-label>
+                        <ion-col style="margin: 0; padding: 0;" size="12">
+                            <ion-input [(ngModel)]="licenseRefNo" autocapitalize="characters" type="text" class="input-control"
+                                       placeholder="এখানে লিখুন"></ion-input>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="ion-rows" *ngIf="takeDrivingLicenseNumber">
+                        <ion-label class="text-size-2">
+                            ইস্যুকারী কর্তৃপক্ষ *
+                        </ion-label>
+                        <ion-select [(ngModel)]="issueAuthorityId" class="input-control" placeholder="নির্বাচন করুন">
+                            <ion-select-option [value]="authority.id"
+                                               *ngFor="let authority of issueAuthorityIdArray">{{authority.value}}</ion-select-option>
+                        </ion-select>
+                        <!--<ion-input class="input-control" *ngIf="isExamVenueSingle" [(ngModel)] ="examVenue" [value]="examVenueList[0].name">{{examVenueList[0].name}}</ion-input>-->
+                        <!--<ion-input class="input-control" *ngIf="isExamVenueSingle" [(ngModel)] ="examVenue" [value]="examVenueList[0].name">{{examVenueList[0].name}}</ion-input>-->
+
+
+                    </ion-row>
+
+
+                </ion-grid>
+
+                <!--<ion-row *ngIf="angshikPassShow" style="margin-top: 5px">-->
+                    <!--<ion-col class="ion-cols" size="12">-->
+                        <!--<ion-label class="text-size-2">-->
+                            <!--আংশিক পাস *-->
+                        <!--</ion-label>-->
+                        <!--<ion-select [(ngModel)]="angshikPass" class="input-control" placeholder="নির্বাচন করুন">-->
+                            <!--<ion-select-option value="Y">Yes</ion-select-option>-->
+                            <!--<ion-select-option value="N">No</ion-select-option>-->
+                        <!--</ion-select>-->
+                    <!--</ion-col>-->
+                <!--</ion-row>-->
+
+                <!-- --------------------VEHICLE CLASS GRID FOR PROFESSIONAL-------------------------------- -->
+                <!--<ion-grid [ngClass]="professionalGrid">-->
+
+                <!--<ion-row style="margin-top: 15px;" class="ion-rows">-->
+                <!--<ion-col class="ion-cols">-->
+                <!--<ion-row>-->
+                <!--<ion-checkbox [(ngModel)]="checked1" (click)="chooseVehicleClassTypeProfessional('1')"></ion-checkbox>-->
+                <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                <!--MOTORCYCLE-->
+                <!--</ion-label>-->
+                <!--</ion-row>-->
+                <!--</ion-col>-->
+
+                <!--<ion-col class="ion-cols">-->
+                <!--<ion-row>-->
+                <!--<ion-checkbox [(ngModel)]="checked2" (click)="chooseVehicleClassTypeProfessional('2')"></ion-checkbox>-->
+                <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                <!--LIGHT-->
+                <!--</ion-label>-->
+                <!--</ion-row>-->
+                <!--</ion-col>-->
+                <!--</ion-row>-->
+
+                <!--<ion-row style="margin-top: 15px;" class="ion-rows">-->
+                <!--<ion-col class="ion-cols">-->
+                <!--<ion-row>-->
+                <!--<ion-checkbox [(ngModel)]="checked3" (click)="chooseVehicleClassTypeProfessional('3')"></ion-checkbox>-->
+                <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                <!--THREE WHEELER-->
+                <!--</ion-label>-->
+                <!--</ion-row>-->
+                <!--</ion-col>-->
+
+                <!--<ion-col class="ion-cols">-->
+                <!--<ion-row>-->
+                <!--<ion-checkbox [(ngModel)]="checked4" (click)="chooseVehicleClassTypeProfessional('4')"></ion-checkbox>-->
+                <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                <!--MEDIUM-->
+                <!--</ion-label>-->
+                <!--</ion-row>-->
+                <!--</ion-col>-->
+                <!--</ion-row>-->
+
+                <!--<ion-row style="margin-top: 15px;" class="ion-rows">-->
+                <!--<ion-col class="ion-cols">-->
+                <!--<ion-row>-->
+                <!--<ion-checkbox [(ngModel)]="checked5" (click)="chooseVehicleClassTypeProfessional('5')"></ion-checkbox>-->
+                <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                <!--HEAVY-->
+                <!--</ion-label>-->
+                <!--</ion-row>-->
+                <!--</ion-col>-->
+                <!--<ion-col class="ion-cols">-->
+                <!--<ion-row>-->
+                <!--<ion-checkbox [(ngModel)]="checked6" (click)="chooseVehicleClassTypeProfessional('6')"></ion-checkbox>-->
+                <!--<ion-label style="margin-left: 10px;" class="text-size-2">-->
+                <!--PSV-->
+                <!--</ion-label>-->
+                <!--</ion-row>-->
+                <!--</ion-col>-->
+                <!--</ion-row>-->
+
+                <!--&lt;!&ndash; -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;ONLY FOR MEDIUM AND HEAVY&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; &ndash;&gt;-->
+                <!--<ion-row style="margin-top: 10px;" class="ion-rows" [ngClass]="drivingLicense">-->
+                <!--<ion-col size="3"></ion-col>-->
+                <!--<ion-col class="ion-cols" size="6">-->
+                <!--<ion-label class="text-size-2">-->
+                <!--Driving License No-->
+                <!--</ion-label>-->
+                <!--<ion-input class="input-control" placeholder="Enter Here"></ion-input>-->
+                <!--</ion-col>-->
+                <!--<ion-col size="3"></ion-col>-->
+                <!--</ion-row>-->
+
+                <!--</ion-grid>-->
+
+
+                <!--<ion-row style="height: 1px; margin-top: 30px;"></ion-row>-->
+
+                <ion-row style="margin-top: 15px; margin-bottom: 10px;">
+                    <ion-label class="row-divider"><u>সংযুক্তি</u></ion-label>
+                </ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col size="7" class="ion-cols">
+                        <ion-label class="text-size-2">চিকিৎসা সনদপত্র সংযুক্ত করুন*</ion-label>
+                        <ion-button (click)="browseImageFile('MC')" class="button-text">ব্রাউজ করুন</ion-button>
+                    </ion-col>
+                    <ion-col size="4" class="ion-cols" *ngIf="isMedicalCertificateUpload">
+                        <!--<ion-img src= "../../../assets/icon/image_upload.svg"></ion-img>-->
+                        <ion-icon id="medical-certificate-check-mark" name="checkmark-circle"></ion-icon>
+                    </ion-col>
+                    <ion-label class="text-size-2" color="button">* ফাইল সাইজ সর্বোচ্চ ৬০০ কেবি</ion-label>
+                </ion-row>
+
+                <ion-row style="margin-top: 30px;" class="ion-rows">
+                    <ion-label class="text-size-2">জাতীয় পরিচয়পত্র/জন্ম সনদ/পাসপোর্ট/নাগরিকত্ব সনদ সংযুক্ত করুন *
+                    </ion-label>
+                    <ion-col size="7" class="ion-cols">
+                        <ion-button (click)="browseImageFile('OT')" class="button-text">ব্রাউজ করুন</ion-button>
+                    </ion-col>
+                    <ion-col size="4" class="ion-cols" *ngIf="isNationalCertificateUpload">
+                        <ion-icon id="national-certificate-check-mark" name="checkmark-circle"></ion-icon>
+                    </ion-col>
+                    <ion-label class="text-size-2" color="button">* ফাইল সাইজ সর্বোচ্চ ৬০০ কেবি</ion-label>
+                </ion-row>
+
+
+
+
+
+                <!--<ion-row style="margin-top: 30px;" class="ion-rows" >-->
+                <!--<ion-label class="text-size-2" *ngIf="!takeDrivingLicenseNumber">শিক্ষা সনদপত্র সংযুক্ত করুন*</ion-label>-->
+                <!--<ion-label class="text-size-2" *ngIf="takeDrivingLicenseNumber">শিক্ষা সনদপত্র সংযুক্ত করুন</ion-label>-->
+                <!--<ion-col size="7" class="ion-cols">-->
+                <!--<ion-button (click)="browseImageFile('EC')" class="button-text">ব্রাউজ করুন</ion-button>-->
+                <!--</ion-col>-->
+                <!--<ion-col size="4" class="ion-cols" *ngIf="isEducationCirtificateUpload">-->
+                <!--<ion-icon id="education-certificate-check-mark" name="checkmark-circle"></ion-icon>-->
+                <!--</ion-col>-->
+                <!--<ion-label class="text-size-2" color="button">* ফাইল সাইজ সর্বোচ্চ ৬০০ কেবি</ion-label>-->
+                <!--</ion-row>-->
+
+                <ion-row style="margin-top: 30px;" class="ion-rows" *ngIf="takeDrivingLicenseNumber">
+                    <ion-label class="text-size-2">ড্রাইভিং লাইসেন্স সংযুক্ত করুন *
+                    </ion-label>
+                    <ion-col size="7" class="ion-cols">
+                        <ion-button (click)="browseImageFile('DL')" class="button-text">ব্রাউজ করুন</ion-button>
+                    </ion-col>
+                    <ion-col size="4" class="ion-cols" *ngIf="isDrivingLicenseUpload">
+                        <ion-icon id="driving-license-check-mark" name="checkmark-circle"></ion-icon>
+                    </ion-col>
+                    <ion-label class="text-size-2" color="button">* ফাইল সাইজ সর্বোচ্চ ৬০০ কেবি</ion-label>
+                </ion-row>
+                <ion-row class="ion-rows" style="margin-top: 30px;">
+                    <ion-label class="text-size-2" >{{eduText}}
+                    </ion-label>
+                </ion-row>
+                <ion-row  >
+
+                    <ion-col size="7" class="ion-cols">
+                        <ion-button (click)="browseImageFile('EC')" class="button-text">ব্রাউজ করুন</ion-button>
+                    </ion-col>
+                    <ion-col size="4" class="ion-cols" *ngIf="isEducationCirtificateUpload">
+                        <ion-icon id="education-certificate-check-mark_no" name="checkmark-circle"></ion-icon>
+                    </ion-col>
+                    <ion-label class="text-size-2" color="button">* ফাইল সাইজ সর্বোচ্চ ৬০০ কেবি</ion-label>
+                </ion-row>
+
+                <ion-row style="margin-top: 30px;" class="ion-rows">
+                    <ion-col size="7" class="ion-cols">
+                        <ion-label class="text-size-2 ">ইউটিলিটি বিল সংযুক্ত করুন</ion-label>
+                        <ion-button [ngClass]="nextButton" (click)="onNextClicked()" expand="full" type="submit"
+                                    class="ion-no-margin" color="disabled">পরবর্তী
+                        </ion-button>
+                        <ion-button (click)="browseImageFile('UB')" class="button-text">ব্রাউজ করুন</ion-button>
+                    </ion-col>
+                    <ion-col size="4" class="ion-cols" *ngIf="isUtilityUpload">
+                        <!--<ion-img src= "../../../assets/icon/image_upload.jpg"></ion-img>-->
+                        <ion-icon id="utility-upload-check-mark" name="checkmark-circle"></ion-icon>
+                    </ion-col>
+                    <ion-label class="text-size-2" color="button">* ফাইল সাইজ সর্বোচ্চ ৬০০ কেবি</ion-label>
+                </ion-row>
+
+                <ion-row style="height: 1px; margin-top: 20px; margin-bottom: 10px;"></ion-row>
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-button (click)="onCancle()" expand="full" type="submit" class="ion-no-margin" color="disabled">
+                            বাতিল করুন
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <!--&lt;!&ndash;<ion-button class="button-text-4" (click)="formDataValidation()">SAVE</ion-button>&ndash;&gt;-->
+                        <ion-button (click)="formDataValidation()" expand="full" type="submit" class="ion-no-margin"
+                                    color="button">সংরক্ষণ করুন
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+
+            <ion-grid>
+                <ion-row style="height: 1px; margin-bottom: 10px"></ion-row>
+                <ion-row>
+                    <ion-col class="ion-text-left ion-cols">
+                        <ion-button [ngClass]="previousButton" (click)="onPreviousClicked()" expand="full" type="submit"
+                                    class="ion-no-margin" color="disabled">ফিরুন
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="3"></ion-col>
+                    <ion-col class="ion-text-right ion-cols">
+                        <ion-button [ngClass]="nextButton" (click)="onNextClicked()" expand="full" type="submit"
+                                    class="ion-no-margin" color="button">পরবর্তী
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-grid>
+
+
+</ion-content>
+
+

@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start" color="light">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text color="light" class="fw700">ড্যাশবোর্ড</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+
+    <ion-grid class="no-scroll">
+        <ion-row>
+            <ion-col size="6" class="fadeIn" *ngFor="let notification of allNotifications;">
+                <ion-tab-button class="main-menu ion-text-center" (click)="notificationClick(notification)">
+                    <span *ngIf="notification.count > 0" class="counter">
+                        <b *ngIf="notification.count<9">0{{ notification.count}}</b>
+                        <b *ngIf="notification.count>9">{{ notification.count}}</b>
+                    </span>
+
+                    <!--<ion-icon *ngIf="notification.notificationType==''" src="/assets/icon/icon id 21-01.svg"></ion-icon>-->
+                    <ion-icon *ngIf="notification.notificationType=='DRIVER_LICENSE'" src="/assets/icon/icon id 50-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='LEARNER_STATUS'" src="/assets/icon/icon id 44-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='TAX'" src="/assets/icon/icon id 7-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='TAX_WILL_EXPIRE_SOON'" src="/assets/icon/icon id 56-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='FITNESS'" src="/assets/icon/icon id 6-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='FITNESS_WILL_EXPIRE_SOON'" src="/assets/icon/icon id 55-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='ROUTE_PERMIT'" src="/assets/icon/icon id 9-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='ROUTE_PERMIT_WILL_EXPIRE_SOON'" src="/assets/icon/icon id 57-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='APPOINTMENT_STATUS'" src="/assets/icon/icon id 21-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='TAGGED_VEHICLE'" src="/assets/icon/icon id 17-01.svg"></ion-icon>
+                    <!--<ion-icon *ngIf="notification.notificationType=='DRIVING_LICENSE_WITH_LEARNER'" src="/assets/icon/icon id 44-01.svg"></ion-icon>-->
+
+                    <ion-label class="ion-text-wrap"> {{getTitelName(notification.notificationType)}}</ion-label>
+                </ion-tab-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+
+    <!--<ion-slides pager="true" [options]="{ autoplay:true}">
+
+        <ion-slide *ngFor="let notification of allNotifications;">
+            <ion-card>
+                <ion-card-header color="primary">
+                    <h2>{{getTitelName(notification.notificationType)}}</h2>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-icon *ngIf="notification.notificationType==''" src="/assets/icon/icon id 21-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='DRIVER_LICENSE'" src="/assets/icon/icon id 50-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='LEARNER_STATUS'" src="/assets/icon/icon id 44-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='TAX'" src="/assets/icon/icon id 7-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='TAX_WILL_EXPIRE_SOON'" src="/assets/icon/icon id 7-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='FITNESS'" src="/assets/icon/icon id 6-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='FITNESS_WILL_EXPIRE_SOON'" src="/assets/icon/icon id 6-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='ROUTE_PERMIT'" src="/assets/icon/icon id 9-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='ROUTE_PERMIT_WILL_EXPIRE_SOON'" src="/assets/icon/icon id 9-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='APPOINTMENT_STATUS'" src="/assets/icon/icon id 21-01.svg"></ion-icon>
+                    <ion-icon *ngIf="notification.notificationType=='TAGGED_VEHICLE'" src="/assets/icon/icon id 17-01.svg"></ion-icon>
+
+                    <h4 *ngIf="notification.count > -1 && notification.message !=null">* <b>{{notification.count}}</b> {{notification.message}}</h4>
+                    <ion-button expand="full" color="button" (click)="notificationClick(notification)">বিস্তারিত</ion-button>
+
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>-->
+
+</ion-content>

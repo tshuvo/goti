@@ -1,0 +1,187 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+/** Ionic CSS Variables **/
+
+:root {
+    /**transparent**/
+    --ion-color-transparent: transparentize(#0c0b28, 255);
+    /** primary **/
+    --ion-color-primary: #3880ff;
+    --ion-color-primary-rgb: 56, 128, 255;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #3171e0;
+    --ion-color-primary-tint: #4c8dff;
+    /** secondary **/
+    --ion-color-secondary: #0cd1e8;
+    --ion-color-secondary-rgb: 12, 209, 232;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #0bb8cc;
+    --ion-color-secondary-tint: #24d6ea;
+    /** tertiary **/
+    --ion-color-tertiary: #7044ff;
+    --ion-color-tertiary-rgb: 112, 68, 255;
+    --ion-color-tertiary-contrast: #ffffff;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    --ion-color-tertiary-shade: #633ce0;
+    --ion-color-tertiary-tint: #7e57ff;
+    /** success **/
+    --ion-color-success: #10dc60;
+    --ion-color-success-rgb: 16, 220, 96;
+    --ion-color-success-contrast: #ffffff;
+    --ion-color-success-contrast-rgb: 255, 255, 255;
+    --ion-color-success-shade: #0ec254;
+    --ion-color-success-tint: #28e070;
+    /** warning **/
+    --ion-color-warning: #ffce00;
+    --ion-color-warning-rgb: 255, 206, 0;
+    --ion-color-warning-contrast: #ffffff;
+    --ion-color-warning-contrast-rgb: 255, 255, 255;
+    --ion-color-warning-shade: #e0b500;
+    --ion-color-warning-tint: #ffd31a;
+    /** danger **/
+    --ion-color-danger: #f04141;
+    --ion-color-danger-rgb: 245, 61, 61;
+    --ion-color-danger-contrast: #ffffff;
+    --ion-color-danger-contrast-rgb: 255, 255, 255;
+    --ion-color-danger-shade: #d33939;
+    --ion-color-danger-tint: #f25454;
+    /** dark **/
+    --ion-color-dark: #222428;
+    --ion-color-dark-rgb: 34, 34, 34;
+    --ion-color-dark-contrast: #ffffff;
+    --ion-color-dark-contrast-rgb: 255, 255, 255;
+    --ion-color-dark-shade: #1e2023;
+    --ion-color-dark-tint: #383a3e;
+    /** medium **/
+    --ion-color-medium: #989aa2;
+    --ion-color-medium-rgb: 152, 154, 162;
+    --ion-color-medium-contrast: #ffffff;
+    --ion-color-medium-contrast-rgb: 255, 255, 255;
+    --ion-color-medium-shade: #86888f;
+    --ion-color-medium-tint: #a2a4ab;
+    /** light **/
+    --ion-color-light: #f4f5f8;
+    --ion-color-light-rgb: 244, 244, 244;
+    --ion-color-light-contrast: #000000;
+    --ion-color-light-contrast-rgb: 0, 0, 0;
+    --ion-color-light-shade: #d7d8da;
+    --ion-color-light-tint: #f5f6f9;
+    /** button-color **/
+    --ion-color-button: #00047E;
+    --ion-color-button-contrast: #ffffff;
+    --ion-color-button-shade: #00046f;
+    --ion-color-button-tint: #1a1d8b;
+    /** disabled-color **/
+    --ion-color-disabled: #808080;
+    --ion-color-disabled-contrast: #ffffff;
+    --ion-color-disabled-shade: #717171;
+    --ion-color-disabled-tint: #8d8d8d;
+    /** h1-color **/
+    --ion-color-h1: #393939;
+    --ion-color-h1-contrast: #393939;
+    --ion-color-h1-shade: #3171e0;
+    --ion-color-h1-tint: #4c8dff;
+    /** h2-color **/
+    --ion-color-h2: #414141;
+    --ion-color-h2-contrast: #414141;
+    --ion-color-h2-shade: #393939;
+    --ion-color-h2-tint: #545454;
+    /** h3-color **/
+    --ion-color-h3: #545454;
+    --ion-color-h3-contrast: #414141;
+    --ion-color-h3-shade: #4a4a4a;
+    --ion-color-h3-tint: #656565;
+    /** formbg-color **/
+    --ion-color-formbg: #EFEFEF;
+    --ion-color-formbg-contrast: #ffffff;
+    --ion-color-formbg-shade: #717171;
+    --ion-color-formbg-tint: #8d8d8d;
+    @font-face {
+        font-family: 'Nikosh';
+        src: url('../assets/fonts/Nikosh.ttf');
+        font-style: normal;
+    }
+
+    .alert-radio-label.sc-ion-alert-md {
+        white-space: pre-line;
+        padding-inline-start: 35px;
+        -webkit-padding-end: 10px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        font-size: medium;
+    }
+}
+
+* {
+font-family: Nikosh;
+}
+
+.ion-color-h1 {
+--ion-color-base: var(--ion-color-h1) !important;
+--ion-color-contrast: var(--ion-color-h1-contrast) !important;
+--ion-color-shade: var(--ion-color-h1-shade) !important;
+--ion-color-tint: var(--ion-color-h1-tint) !important;
+}
+
+.ion-color-h2 {
+--ion-color-base: var(--ion-color-h2) !important;
+--ion-color-contrast: var(--ion-color-h2-contrast) !important;
+--ion-color-shade: var(--ion-color-h2-shade) !important;
+--ion-color-tint: var(--ion-color-h2-tint) !important;
+}
+
+.ion-color-h3 {
+--ion-color-base: var(--ion-color-h3) !important;
+--ion-color-contrast: var(--ion-color-h3-contrast) !important;
+--ion-color-shade: var(--ion-color-h3-shade) !important;
+--ion-color-tint: var(--ion-color-h3-tint) !important;
+}
+
+.ion-color-button {
+--ion-color-base: var(--ion-color-button) !important;
+--ion-color-contrast: var(--ion-color-button-contrast) !important;
+--ion-color-shade: var(--ion-color-button-shade) !important;
+--ion-color-tint: var(--ion-color-button-tint) !important;
+}
+
+.ion-color-disabled {
+--ion-color-base: var(--ion-color-disabled) !important;
+--ion-color-contrast: var(--ion-color-disabled-contrast) !important;
+--ion-color-shade: var(--ion-color-disabled-shade) !important;
+--ion-color-tint: var(--ion-color-disabled-tint) !important;
+}
+
+.ion-color-formbg {
+--ion-color-base: var(--ion-color-formbg) !important;
+--ion-color-contrast: var(--ion-color-formbg-contrast) !important;
+--ion-color-shade: var(--ion-color-formbg-shade) !important;
+--ion-color-tint: var(--ion-color-formbg-tint) !important;
+}
+
+#head {
+//background-image: url("/assets/images/header-banner.jpg");
+min-height: auto;
+color: white;
+ion-toolbar {
+    min-height: 20px;
+}
+ion-button {
+    font-size: small;
+}
+}
+
+// @keyframes fadeIn {
+//     from {
+//         opacity: 0;
+//     }
+//     to {
+//         opacity: 1;
+//     }
+// }
+// .fadeIn {
+//     animation-name: fadeIn;
+//     animation-duration: 1s;
+// }

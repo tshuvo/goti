@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar color="button">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light" class="fw700">মোটরযান সংযুক্ত করণ</ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="formbg">
+
+  <ion-card-header *ngIf="isTaggedVehicle">
+    <ion-card-title>সংযুক্তকৃত গাড়ির তালিকা</ion-card-title>
+  </ion-card-header>
+
+  <ion-card *ngIf="isTaggedVehicle" id="vehicle-list-box">
+    <ion-card-content *ngFor="let vehicle of listOfVehicleRegistrationNumber; let i = index ">
+      <ion-item lines="none">
+        <ion-text>{{vehicle.registrationNo}}</ion-text>
+        <!-- src="assets/images/tag_driver_green.svg" -->
+        <ion-icon *ngIf="vehicle.driverTaggedYn == 'Y'" color="secondary" slot="end" name="eye" (click)="goForTagDriver(vehicle.registrationNo, 1)"></ion-icon>
+        <ion-icon *ngIf="vehicle.driverTaggedYn == 'N'" slot="end" src="assets/images/tag_driver_yellow.svg" (click)="goForTagDriver(vehicle.registrationNo, 0)"></ion-icon>
+        <ion-icon slot="end" src="assets/images/untag_vehicle.svg" (click)="untagAlert(vehicle.encTagId)"></ion-icon>
+      </ion-item>
+      <ion-row></ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid style="margin: 10px; padding: 10px; border: 1px solid #ccc; background-color: #fff">
+
+    <fieldset style="padding: 10px;">
+      <legend style="font-size: medium;">মোটরযান অনুসন্ধান</legend>
+      <ion-row>
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            রেজিস্ট্রেশন নম্বর (শেষ চার সংখ্যা) *
+          </ion-label>
+          <ion-input [(ngModel)]="registrationNo" [attr.maxlength]="4" class="input-control_upper_case" placeholder="এখানে লিখুন" autocapitalize="characters" type="number"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-rows">
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            উৎপাদনের বছর *
+          </ion-label>
+          <ion-input [(ngModel)]="manuYear" type="number" [attr.maxlength]="4" type="tel" autocapitalize="off" class="input-control" placeholder="বছর"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-rows">
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            চ্যাসিস নম্বর *
+          </ion-label>
+          <ion-input [(ngModel)]="chassisNo"  autocapitalize="characters" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-rows">
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            ইঞ্জিন নম্বর *
+          </ion-label>
+          <ion-input [(ngModel)]="engineNo"  autocapitalize="characters" class="input-control" placeholder="এখানে লিখুন"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 10px;">
+        <ion-col class="ion-cols" size="5.75">
+          <ion-button routerLink="/home" expand="full" type="submit" class="ion-no-margin" color="disabled">
+            মুছুন
+          </ion-button>
+        </ion-col>
+        <ion-col size=".5"></ion-col>
+        <ion-col class="ion-cols" size="5.75">
+          <ion-button (click)="searchVehicles()" expand="full" type="submit" class="ion-no-margin" color="button">
+            অনুসন্ধান
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </fieldset>
+
+    <fieldset *ngIf="vehicleSearch" style="margin-top: 20px; padding: 10px;">
+      <legend style="font-size: medium;">মোটরযান সংযুক্ত করণ</legend>
+      <ion-row>
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            রেজিস্ট্রেশন নম্বর
+          </ion-label>
+          <ion-input readonly="true" [(ngModel)]="displayRegistrationNumber" class="input-control"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-rows">
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            মালিকের নাম
+          </ion-label>
+          <ion-input readonly="true" [(ngModel)]="displayOwnerName" class="input-control"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-rows">
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            চ্যাসিস নম্বর
+          </ion-label>
+          <ion-input readonly="true" [(ngModel)]="displayChassisNo" class="input-control"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-rows">
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            ইঞ্জিন নম্বর
+          </ion-label>
+          <ion-input readonly="true" [(ngModel)]="displayEngineNo" class="input-control"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-rows">
+        <ion-col class="ion-cols">
+          <ion-label class="text-size-2">
+            উৎপাদনের বছর
+          </ion-label>
+          <ion-input readonly="true" [(ngModel)]="displayManuYear" class="input-control"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 10px;">
+        <ion-col class="ion-cols" size="3">
+        </ion-col>
+        <ion-col class="ion-cols" size="6">
+          <ion-button (click)="tagVehicles()" expand="full" type="submit" class="ion-no-margin" color="button">সংযুক্ত করুন
+          </ion-button>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+      </ion-row>
+    </fieldset>
+
+  </ion-grid>
+
+</ion-content>

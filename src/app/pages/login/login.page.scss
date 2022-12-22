@@ -1,0 +1,66 @@
+ion-menu-button {
+    color: #fff;
+}
+
+.home {
+    color: #fff;
+}
+
+ion-content {
+    color: #fff;
+    --background: url(../../../assets/images/bg-login.jpg) no-repeat center/cover fixed;
+    #login-box {
+        color: #fff;
+        // padding-top: 20%;
+        // padding-bottom: 30%;
+        -webkit-box-shadow: none;
+        height: 75%;
+        display: -webkit-box;
+        -webkit-box-pack: center;
+        -webkit-box-align: center;
+        display: -moz-box;
+        -moz-box-pack: center;
+        -moz-box-align: center;
+        display: -ms-flexbox;
+        -ms-flex-pack: center;
+        -ms-flex-align: center;
+        margin-bottom: 10%;
+        width: auto;
+        ion-card-title {
+            color: white;
+            font-weight: bold;
+            padding-bottom: 10%;
+            font-size: larger;
+        }
+        ion-card-subtitle {
+            color: white;
+        }
+        ion-button {
+            font-size: small;
+        }
+        ion-item {
+            --ion-background-color: #76C1AA;
+            padding-top: 10px;
+            --color: default;
+            font-weight: bold;
+            font-size: small;
+            ion-input {
+                --placeholder-color: default;
+            }
+        }
+    }
+    .footer {
+        bottom: 0px;
+        color: white;
+        font-size: small;
+        text-align: center;
+    }
+    .link {
+        font-size: small;
+        text-decoration: underline;
+    }
+}
+
+#forgot{
+    padding: 3% 0 3% 0;
+}

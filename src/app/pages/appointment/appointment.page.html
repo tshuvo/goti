@@ -1,0 +1,113 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text color="light" class="fw700">সাক্ষাৎকার</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-grid style="border: 1px solid #ccc; margin: 10px 10px 0; background-color: #fff;">
+        <ion-row class="ion-rows">
+            <ion-col class="ion-cols">
+                <ion-label class="text-size-2">
+                    সাক্ষাৎকারের তারিখ
+                </ion-label>
+                <ion-datetime cancelText="বাতিল করুন " doneText="ঠিক আছে"  [min]="mindate" [max]="maxdate" (ionChange)="updateDate($event)" displayFormat="D/M/YYYY" pickerFormat="D/M/YYYY" class="input-control" placeholder="দিন/মাস/বছর"></ion-datetime>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-rows">
+            <ion-col class="ion-cols">
+                <ion-label class="text-size-2">
+                    নিবন্ধন নম্বর
+                </ion-label>
+
+                <!--<ion-select interface="popover">
+                    <ion-select-option value="nes">NESdfdsfsdf df sdf sd sdff</ion-select-option>
+                    <ion-select-option value="n64">Nintendo64</ion-select-option>
+                    <ion-select-option value="ps">PlayStation</ion-select-option>
+                    <ion-select-option value="genesis">Sega Genesis</ion-select-option>
+                    <ion-select-option value="saturn">Sega Saturn</ion-select-option>
+                    <ion-select-option value="snes">SNES</ion-select-option>
+                </ion-select>-->
+
+
+                <ion-select interface="alert" cancelText="বাতিল" okText="ঠিক আছে" class="input-control" [(ngModel)]="regNo" placeholder="নির্বাচন করুন" (ionChange) = "getContactNumber()"> <!--(ionChange)="getTimeSlot()-->">
+                    <ion-select-option *ngFor="let reg of regNoList" value="{{reg.name}}" style="font-size: smaller">{{reg.name }}</ion-select-option>
+                </ion-select>
+
+                <!--<ion-select cancel-text="" interface="action-sheet" class="input-control" [(ngModel)]="regNo" placeholder="Select One" (ionChange)="getTimeSlot()">
+                    <ion-select-option *ngFor="let reg of regNoList" value="{{reg.name}}">{{reg.name}}</ion-select-option>
+                </ion-select>-->
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-rows" >
+            <ion-col class="ion-cols">
+                <ion-label class="text-size-2">
+                    শাখা
+                </ion-label>
+                <!--<ion-select class="input-control" [(ngModel)]="timeSlot" placeholder="Select One">
+                    <ion-select-option *ngFor="let slot of timeSlotList" value="{{slot.id}}">{{slot.name}}</ion-select-option>
+                </ion-select>-->
+
+                <ion-select interface="alert" cancelText="বাতিল" okText="ঠিক আছে" class="input-control" [(ngModel)]="branch" placeholder="নির্বাচন করুন" (ionChange) = "getTimeSlot()">
+                    <ion-select-option *ngFor="let slot of branchList" value="{{slot.id}}">{{slot.name}}</ion-select-option>
+                </ion-select>
+
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-rows" >
+            <ion-col class="ion-cols">
+                <ion-label class="text-size-2">
+                    সময় স্লট
+                </ion-label>
+                <!--<ion-select class="input-control" [(ngModel)]="timeSlot" placeholder="Select One">
+                    <ion-select-option *ngFor="let slot of timeSlotList" value="{{slot.id}}">{{slot.name}}</ion-select-option>
+                </ion-select>-->
+
+                <ion-select interface="alert" cancelText="বাতিল" okText="ঠিক আছে" class="input-control" [(ngModel)]="timeSlot" placeholder="নির্বাচন করুন">
+                    <ion-select-option *ngFor="let slot of timeSlotList" value="{{slot.id}}">{{slot.name}}</ion-select-option>
+                </ion-select>
+
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-rows" >
+            <ion-col class="ion-cols">
+                <ion-label class="text-size-2">
+                    মোবাইল নম্বর
+                </ion-label>
+                <!--<ion-item *ngIf="!showEditMObile"> {{mobileNumber}}</ion-item>-->
+                <ion-input  type="number" value="" [disabled]="showEditMObile" [(ngModel)]="mobileNumber"></ion-input>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="height: 1px; background-color: #fff; margin-top: 10px; margin-bottom: 10px;"></ion-row>
+
+        <ion-row class="ion-rows">
+            <ion-col class="ion-cols" size="5.75">
+                <ion-button class="button-text" color="disabled" (click)="cleatAppointment()">পরিষ্কার করুন </ion-button>
+            </ion-col>
+
+            <ion-col size=".5"></ion-col>
+
+            <ion-col class="ion-cols" size="5.75">
+                <ion-button class="button-text-2" color="button" (click)="submitAppointment()">জমা দিন</ion-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+</ion-content>

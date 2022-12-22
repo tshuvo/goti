@@ -1,0 +1,47 @@
+
+ion-content {
+  margin: 0;
+  padding: 0;
+
+  ion-item {
+    margin: 10px;
+    --color: #000;
+    font-weight: bold;
+    font-size: small;
+
+    ion-input {
+      text-transform: none;
+      font-size: small;
+      margin: 0;
+      padding: 0;
+      --placeholder-color: #000;
+    }
+
+    ion-label {
+      --color: #000;
+      font-size: small;
+    }
+  }
+
+  ion-label {
+    color: black;
+    font-size: small;
+    margin: 10px;
+  }
+
+  ion-card-subtitle {
+    margin: 15px;
+    padding: 0;
+
+    ion-text {
+      color: red;
+      font-size: small;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  ion-button {
+    margin: 10px;
+  }
+}

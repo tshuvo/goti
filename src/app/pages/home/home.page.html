@@ -1,0 +1,163 @@
+<ion-header id="head" color="button">
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+        <ion-button *ngIf="!loggedIn" fill="clear" slot="end" class="ion-text-end" routerLink="/login">
+            <ion-icon name="log-in" size="medium"></ion-icon>&nbsp; লগইন
+        </ion-button>
+
+        <ion-button *ngIf="!loggedIn" fill="clear" slot="end" class="ion-text-end" routerLink="/registration">
+            <ion-icon name="list" size="medium" ></ion-icon>&nbsp; রেজিস্টার
+        </ion-button>
+
+       <!-- <ion-button *ngIf="!loggedIn" fill="clear" slot="end" class="ion-text-end" routerLink="/test">
+            <ion-icon name="list" size="medium"></ion-icon>&nbsp; test
+        </ion-button> -->
+
+    </ion-toolbar>
+
+    <ion-toolbar color="button" class="powered-logo">
+        <ion-grid>
+            <ion-row>
+                <ion-col size="4" class="header-middle-content">
+                    <ion-icon src="/assets/icon/white_goti.svg"></ion-icon>
+                </ion-col>
+                <ion-col size="4" class="header-middle-content">
+                    <ion-img src="/assets/images/brta.png"></ion-img>
+                </ion-col>
+                <ion-col size="4" class="header-middle-content">
+                    <ion-img src="/assets/images/govt.png"></ion-img>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <p class="marquee" [hidden]="breadcumb">
+   <ion-label >
+      {{bankingMassage}}
+   </ion-label>
+    </p>
+
+    <!--service menu-->
+    <fieldset *ngIf="loggedIn && !breadcumb">
+        <legend>সার্ভিস সমুহ</legend>
+        <ion-grid class="no-scroll">
+            <ion-row>
+                <ion-col size="4" class="fadeIn">
+                    <ion-tab-button class="main-menu ion-text-center" routerLink="/dashboard">
+                        <ion-icon src="/assets/icon/dashboard.svg"></ion-icon>
+                        <ion-label class="ion-text-wrap">ড্যাশবোর্ড </ion-label>
+                    </ion-tab-button>
+                </ion-col>
+
+                <ion-col size="4" class="fadeIn">
+                    <ion-tab-button class="main-menu ion-text-center" routerLink="/user-profile">
+                        <ion-icon src="/assets/icon/user-profile.svg"></ion-icon>
+                        <ion-label class="ion-text-wrap">প্রোফাইল </ion-label>
+                    </ion-tab-button>
+                </ion-col>
+                <ion-col size="4" class="fadeIn">
+                    <ion-tab-button class="main-menu ion-text-center" routerLink="/prerequisition-of-learner">
+                        <ion-icon src="/assets/icon/driving_license_application.svg"></ion-icon>
+                        <ion-label class="ion-text-wrap">ড্রাইভিং লাইসেন্সের জন্য আবেদন</ion-label>
+                    </ion-tab-button>
+                </ion-col>
+            </ion-row>
+            <!-- <ion-row>
+                <ion-col size="4" class="fadeIn">
+                    <ion-tab-button class="main-menu ion-text-center">
+                        <ion-icon src="/assets/icon/icon id 43-01.svg"></ion-icon>
+                        <ion-label class="ion-text-wrap">স্মার্ট কার্ড এর জন্য আবেদন</ion-label>
+                    </ion-tab-button>
+                </ion-col>
+
+                <ion-col size="4" class="fadeIn">
+                    <ion-tab-button class="main-menu ion-text-center" routerLink="/prerequisition-of-learner">
+                        <ion-icon src="/assets/icon/icon id 44-01.svg"></ion-icon>
+                        <ion-label class="ion-text-wrap">শিক্ষানবিশ লাইসেন্স এর জন্য আবেদন</ion-label>
+                    </ion-tab-button>
+                </ion-col>
+            </ion-row> -->
+        </ion-grid>
+    </fieldset>
+
+
+
+    <!--main menu-->
+    <fieldset *ngIf="!hasSlide && showMenu">
+        <legend>সাধারণ তথ্য</legend>
+        <ion-grid *ngIf="menus" class="no-scroll">
+            <ion-row>
+                <ion-col *ngFor="let menu of menus; let i = index" size="6" class="fadeIn">
+                    <ion-tab-button class="main-menu ion-text-center" (click)="getContent(menu['ICON_ID'], menu['HAS_SLIDES'], menu['ICON_ID'])">
+                        <ion-icon src="/assets/icon/icon id {{menu['ICON_ID']}}-01.svg"></ion-icon>
+                        <ion-label class="ion-text-wrap">{{menu['ICON_TEXT']}}</ion-label>
+                    </ion-tab-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </fieldset>
+
+    <!--slide content-->
+
+    <div *ngIf="hasSlide">
+
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
+        <link rel="stylesheet" href="/assets/external/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/external/css/custom.css">
+    </div>
+
+
+    <ion-slides class="content-slider" pager="true" *ngIf="hasSlide" [options]="{autoHeight: true, pagination: true}">
+        <ion-slide *ngFor="let slide of slides; let i = index" color="h2">
+            <!--Error page for empty content-->
+            <div *ngIf="slide.SLIDE_CONTENT == ''">{{emptySlideMsg}}</div>
+
+            <!--HTML or TEXT content-->
+            <div class="slide-html" *ngIf="slide.SLIDE_CONTENT != '' && slide.SLIDE_TYPE =='TEXT'" [innerHTML]='slide.SLIDE_CONTENT'></div>
+
+            <!--GOOGLE map for nearest branch-->
+            <div class="slide-html" *ngIf="slide.SLIDE_CONTENT_ARRAY != '' && slide.SLIDE_TYPE =='MAP'">
+                <!-- style="height: calc(90vh - 0em - 175px); width: 350px; display: block;" -->
+                <app-map-view [branchLocation]="slide.SLIDE_CONTENT_ARRAY" [locationId] = "slide.SLIDE_SN" style="height: calc(90vh - 0em - 175px); width: 100%; display: block;"></app-map-view>
+            </div>
+
+            <!--Circle page-->
+            <div class="slide-html" *ngIf="slide.SLIDE_CONTENT != '' && slide.SLIDE_TYPE =='BRTA_CIRCLE'">
+                <app-circle-info [contactData]="slide.SLIDE_CONTENT"></app-circle-info>
+            </div>
+
+            <!--Booth page-->
+            <div class="slide-html" *ngIf="slide.SLIDE_CONTENT != '' && slide.SLIDE_TYPE =='BOOTH'">
+                <app-booth-info></app-booth-info>
+            </div>
+
+            <!--Bank page-->
+            <div class="slide-html" *ngIf="slide.SLIDE_CONTENT != '' && slide.SLIDE_TYPE =='BANK'">
+                <app-bank-branch></app-bank-branch>
+            </div>
+
+        </ion-slide>
+    </ion-slides>
+</ion-content>
+
+<ion-footer *ngIf="breadcumb">
+    <!--breadcumb-->
+    <ion-segment *ngIf="breadcumb" [(ngModel)]="activeMenu" scrollable>
+        <ion-segment-button (click)="getContent('0', 'N', '0')" class="fadeIn">
+            <ion-icon name="home" color="primary"></ion-icon>
+        </ion-segment-button>
+
+        <ion-segment-button class="fadeIn" *ngFor="let bc of breadcumb; let i = index" value="{{bc['ICON_ID']}}" (click)="getContent(bc['ICON_ID'], bc['HAS_SLIDES'], bc['ICON_ID'])">
+            <ion-icon src="/assets/icon/icon id {{bc['ICON_ID']}}-01.svg"></ion-icon>
+        </ion-segment-button>
+    </ion-segment>
+</ion-footer>

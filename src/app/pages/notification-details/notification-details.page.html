@@ -1,0 +1,489 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="no-padding-margin ion-text-center">
+            <ion-text color="light" class="ion-text-wrap">
+                <ion-text color="light" class="ion-text-wrap">{{templateName}}</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div *ngIf="showData==false">
+        <ion-item lines="none" color="danger" class="activated ion-text-center" style="background-color: #bdbfae;  color: #fff;">
+            <ion-label>দুঃখিত! কোন তথ্য পাওয়া যায় নি</ion-label>
+        </ion-item>
+    </div>
+
+
+    <!--Start DRIVER_LICENSE -->
+    <!--<div *ngIf="templateType=='DRIVER_LICENSE' && showData">
+        &lt;!&ndash;<div class="center-image">
+            <ion-avatar routerLink="/driver-license-tagging">
+
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>&ndash;&gt;
+
+        <ion-card color="default" *ngFor="let item of driverInformation" style="border: 1px solid #d2d4d7; margin-bottom: 5%">
+            <ion-item lines="none" color="#683091" class="activated" style="background-color: #683091;  color: #fff;">
+                <ion-label>{{item.licenseName}}</ion-label>
+            </ion-item>
+            <ion-card-content>
+                <p><b>লাইসেন্স নাম্বার:</b> {{item.licenseNo}}</p>
+                <p><b>লাইসেন্সের ধরণ:</b> {{item.licenseType}}</p>
+                <p *ngIf="item.licenseExpiryDate !=''"><b>Expiry Date.:</b>
+                    <span *ngIf="item.licenseExpiryDateYn =='EXPIRED'" style="color:red"> {{item.licenseExpiryDate}}</span>
+                    <span *ngIf="item.licenseExpiryDateYn !='EXPIRED'"> {{item.licenseExpiryDate}}</span>
+                </p>
+                <p style="text-align: center;"><b>&nbsp;</b>{{item.licenseExpiryDayLeft}}</p>
+            </ion-card-content>
+        </ion-card>
+    </div>-->
+
+    <div *ngIf="templateType=='DRIVER_LICENSE' && showData" class="scrolling-wrapper-flexbox">
+
+        <ion-grid style="margin-top: 10px;" class="scroll-items">
+
+            <ion-row style="background-color: #683091; font-size: 14px; color: #fff;">
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                    <ion-label>
+                        সার্ভিস আইডি
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                    <ion-label>
+                        নাম
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                    <ion-label>
+                        আবেদনের তারিখ
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="1.5">
+                    <ion-label>
+                        লাইসেন্সের ধরন
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="1">
+                    <ion-label>
+                        ভেনু
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="1">
+                    <ion-label>
+                        সময়
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="1.5">
+                    <ion-label>
+                        এনআইডি/পাসপোর্ট নম্বর
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="ion-cols cols-padding ion-text-center" size="1"></ion-col>
+            </ion-row>
+
+            <!--<ion-grid style="background-color: #fff; font-size: small" >-->
+
+            <!-- ---------------------------------LOOPING THIS DIV--------------------------------------- -->
+            <div *ngFor="let item of drivingLicenseInformation" class="borders-3" style="font-size: small">
+                <ion-row>
+
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                        <ion-label class="font-size-11">{{item.serviceRequestNo | titlecase}}</ion-label>
+                    </ion-col>
+
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                        <ion-label class="font-size-11">{{item.applicantNameEng | titlecase}}</ion-label>
+                    </ion-col>
+
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                        <ion-label class="font-size-11">{{item.applicationDuration }}</ion-label>
+                    </ion-col>
+
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="1.5">
+                        <ion-label class="font-size-11">{{item.licenseType | titlecase}}</ion-label>
+                    </ion-col>
+
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="1">
+                        <ion-label class="font-size-11">{{item.learnerExamVenue | titlecase}}</ion-label>
+                    </ion-col>
+
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="1">
+                        <ion-label class="font-size-11" *ngIf="item.learnerExamDate !=''">{{item.learnerExamDate }} {{item.learnerExamTime}}</ion-label>
+                    </ion-col>
+
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="1.5">
+                        <ion-label class="font-size-11">{{item.learnerNidPassportNo}}</ion-label>
+                    </ion-col>
+
+                    <!--<ion-col class="ion-cols cols-padding ion-text-center" size="1">-->
+                        <!--<ion-icon name="eye" color="tertiary" style="zoom:1.5;"></ion-icon>-->
+                    <!--</ion-col>-->
+                    <ion-col class="ion-cols cols-padding ion-text-center" size="1">
+                        <!--<ion-icon name="eye" color="tertiary" style="zoom:1.5;"  *ngIf="item.learnerExamDate !=''"  (click)="downloadLearnerLicense(item)"></ion-icon>-->
+                        <ion-icon name="create" color="tertiary" style="zoom:1.5;" (click)="gotoLearnerLicenseApplication(item.encCitizenDLId)" *ngIf="item.learnerExamDate ==''"></ion-icon>
+                        <!--<a href="#" *ngIf="item.learnerExamDate !=''" (click)="downloadLearnerLicense(item)">-->
+                        <!--<a href="{{downloadLearnerLicense(item)}}" target="_system" *ngIf="item.learnerExamDate !=''">-->
+                        <ion-icon *ngIf="item.learnerExamDate !=''" (click)="downloadLearnerLicense(item)" name="eye" color="tertiary" style="zoom:1.5;"></ion-icon>
+                        <!--</a>-->
+
+                    </ion-col>
+
+                </ion-row>
+
+                <ion-row style="height: 1px; background-color: #ccc;"></ion-row>
+            </div>
+
+            <!--</ion-grid>-->
+        </ion-grid>
+    </div>
+    <!--End LEARNER_STATUS-->
+
+
+    <!--End DRIVER_LICENSE-->
+
+    <!--Start LEARNER_STATUS -->
+    <div *ngIf="templateType=='LEARNER_STATUS' && showData" class="scrolling-wrapper-flexbox">
+        <!-- <div class="center-image">
+             <ion-avatar routerLink="/prerequisition-of-learner">
+                 <img src="../../../assets/images/add.jpg">
+             </ion-avatar>
+         </div>-->
+
+        <ion-grid style="margin-top: 10px;" class="scroll-items">
+
+            <ion-row style="background-color: #683091; font-size: 14px; color: #fff;">
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                    <ion-label>
+                        সার্ভিস আইডি
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="3">
+                    <ion-label>
+                        নাম
+                    </ion-label>
+                </ion-col>
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                    <ion-label>
+                        ভেনু
+                    </ion-label>
+                </ion-col>
+
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                    <ion-label>
+                        লাইসেন্সের ধরন
+                    </ion-label>
+                </ion-col>
+                <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                    <ion-label>
+                        সময়
+                    </ion-label>
+                </ion-col>
+                <ion-col class="ion-cols cols-padding ion-text-center"></ion-col>
+            </ion-row>
+
+            <!--<ion-grid style="background-color: #fff; font-size: small" >-->
+
+            <!-- ---------------------------------LOOPING THIS DIV--------------------------------------- -->
+            <div *ngFor="let item of learnerDrivingLicenseData" class="borders-3" style="font-size: small">
+                <ion-row>
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                        <ion-label class="font-size-11">{{item.serviceRequestNo | titlecase}}</ion-label>
+                    </ion-col>
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="3">
+                        <ion-label class="font-size-11">{{item.applicantNameEng | titlecase}}</ion-label>
+                    </ion-col>
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                        <ion-label class="font-size-11">{{item.learnerExamVenue | titlecase}}</ion-label>
+                    </ion-col>
+
+                     <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                        <ion-label class="font-size-11">{{item.licenseType | titlecase}}</ion-label>
+                    </ion-col>
+                    <ion-col class="borders-2 ion-cols cols-padding ion-text-center" size="2">
+                        <ion-label class="font-size-12" *ngIf="item.learnerExamDate !=''">{{item.learnerExamDate }} {{item.learnerExamTime}}</ion-label>
+                    </ion-col>
+                    <ion-col class="ion-cols cols-padding ion-text-center">
+                        <!--<ion-icon name="eye" color="tertiary" style="zoom:1.5;"  *ngIf="item.learnerExamDate !=''"  (click)="downloadLearnerLicense(item)"></ion-icon>-->
+                        <ion-icon name="create" color="tertiary" style="zoom:1.5;" (click)="gotoLearnerLicenseApplication(item.serviceRequestNo)" *ngIf="item.learnerExamDate ==''"></ion-icon>
+                        <!--<a href="#" *ngIf="item.learnerExamDate !=''" (click)="downloadLearnerLicense(item)">-->
+                        <!--<a href="{{downloadLearnerLicense(item)}}" target="_system" *ngIf="item.learnerExamDate !=''">-->
+                            <ion-icon *ngIf="item.learnerExamDate !=''" (click)="downloadLearnerLicense(item)" name="eye" color="tertiary" style="zoom:1.5;"></ion-icon>
+                        <!--</a>-->
+
+                    </ion-col>
+                </ion-row>
+                <ion-row style="height: 1px; background-color: #ccc;"></ion-row>
+            </div>
+
+            <!--</ion-grid>-->
+        </ion-grid>
+    </div>
+    <!--End LEARNER_STATUS-->
+
+    <!--Start APPOINTMENT_STATUS -->
+    <div *ngIf="templateType=='APPOINTMENT_STATUS' && showData">
+        <!--<div class="center-image">
+            <ion-avatar routerLink="/appointment">
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>-->
+
+        <ion-card color="default" *ngFor="let item of appointmentInformation" style="border: 1px solid #d2d4d7; margin-bottom: 5%">
+            <ion-item lines="none" color="#683091" class="activated" style="background-color: #683091;  color: #fff;">
+                <ion-label>{{item.ruleName}}</ion-label>
+            </ion-item>
+            <ion-card-content>
+                <p><b>তারিখ:</b> {{item.appointmentDate}}</p>
+                <p><b>সময় স্লট:</b> {{item.slotName}}</p>
+                <p><b>ক্রমিক নং:</b> {{item.serialNo}}</p>
+                <p><b>রেজিস্ট্রেশন নম্বর:</b> {{item.registrationNo}}</p>
+
+
+                <ion-row class="ion-rows">
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-button class="button-text"  (click)="deleteAppointment(item.encAppointmentId)">ডাটা মুছুন</ion-button>
+                    </ion-col>
+                    <ion-col size=".5">
+
+                    </ion-col>
+                    <ion-col class="ion-cols" size="5.75">
+                        <ion-button class="button-text-2" color="button" (click)="downloadAppointment(item.encAppointmentId)">ডাউনলোড</ion-button>
+                    </ion-col>
+                </ion-row>
+
+                <!--<ion-item lines="none" color="#683091" class="activated" style="background-color: #CB0920; border-radius: 5px; color: #fff;" (click)="appointmentDeleteAlert(item.encAppointmentId)">-->
+                    <!--<ion-label class="ion-text-center">ডাটা মুছুন</ion-label>-->
+                <!--</ion-item>-->
+            </ion-card-content>
+        </ion-card>
+    </div>
+    <!--End APPOINTMENT_STATUS-->
+
+    <!--Start FITNESS_WILL_EXPIRE_SOON  -->
+    <div *ngIf="((templateType=='FITNESS_WILL_EXPIRE_SOON' && showData))">
+        <!--<div class="center-image">
+            <ion-avatar routerLink="/vehicle-tagging">
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>-->
+
+        <div *ngFor="let item of vehicleInformationData">
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.fitnessExpiryDateYn == 'W' && item.fitnessExpiryDate!=''">
+                <ion-text>
+                    <ion-label class="item-label-data" color="h1">{{item.registrationNo}}</ion-label>
+                    <hr>
+                    <ion-label class="item-label-details" color="danger" *ngIf="item.fitnessExpiryDate!=''">মেয়াদোত্তীর্ণ তারিখ: {{item.fitnessExpiryDate}}</ion-label>
+                </ion-text>
+                <ion-button slot="end" class="item-btn" expand="full" color="button"  (click)="goFor('FITNESS',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+        </div>
+    </div>
+    <!--End FITNESS_WILL_EXPIRE_SOON-->
+
+    <!--Start FITNESS  -->
+    <div *ngIf="((templateType=='FITNESS' && showData))">
+        <!--<div class="center-image">
+            <ion-avatar routerLink="/vehicle-tagging">
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>-->
+
+        <div *ngFor="let item of vehicleInformationData">
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.fitnessExpiryDateYn == 'Y' && item.fitnessExpiryDate!=''">
+                <ion-text>
+                    <ion-label class="item-label-data" color="h1">{{item.registrationNo}}</ion-label>
+                    <hr>
+                    <ion-label class="item-label-details" color="danger" *ngIf="item.fitnessExpiryDate!=''">মেয়াদোত্তীর্ণ তারিখ: {{item.fitnessExpiryDate}}</ion-label>
+                </ion-text>
+                <ion-button slot="end" class="item-btn" expand="full" color="button" *ngIf="item.fitnessExpiryDateYn=='Y'" (click)="goFor('FITNESS',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+
+        </div>
+
+    </div>
+    <!--End FITNESS-->
+
+    <!--Start TAX_WILL_EXPIRE_SOON  -->
+    <div *ngIf="((templateType=='TAX_WILL_EXPIRE_SOON' && showData))">
+        <!--<div class="center-image">
+            <ion-avatar routerLink="/vehicle-tagging">
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>-->
+
+        <div *ngFor="let item of vehicleInformationData">
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.taxTokenExpiryDateYn == 'W' && item.taxTokenExpiryDate!=''">
+                <ion-label>
+                    <ion-text class="item-label-data ion-text-wrap" color="h1">{{item.registrationNo}}</ion-text>
+                    <hr>
+                    <ion-text class="item-label-details ion-text-wrap" color="danger" *ngIf="item.taxTokenExpiryDate!=''">মেয়াদোত্তীর্ণ তারিখ: {{item.taxTokenExpiryDate}}</ion-text>
+                </ion-label>
+                <ion-label slot="end">
+                    <ion-text class="ion-text-wrap" style="color:#1c0bbf" *ngIf="item.freeTaxTokenYN =='Y'">সংশ্লিষ্ট বিআরটিএ অফিস থেকে আপনার গাড়ির জন্য ফ্রি ট্যাক্স টোকেন সংগ্রহ করুন।</ion-text>
+                </ion-label>
+                <ion-button slot="end" class="item-btn" expand="full" color="button" *ngIf="item.freeTaxTokenYN =='N'" (click)="goFor('TAX',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+        </div>
+
+
+    </div>
+    <!--End TAX_WILL_EXPIRE_SOON-->
+
+    <!--Start TAX  -->
+    <div *ngIf="((templateType=='TAX' && showData))">
+        <!--<div class="center-image">
+            <ion-avatar routerLink="/vehicle-tagging">
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>-->
+
+        <div *ngFor="let item of vehicleInformationData">
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.taxTokenExpiryDateYn == 'Y' && item.taxTokenExpiryDate!=''">
+                <ion-label >
+                    <ion-text class="item-label-data ion-text-wrap" color="h1">{{item.registrationNo}}</ion-text>
+                    <hr>
+                    <ion-text class="item-label-details ion-text-wrap" color="danger" *ngIf="item.taxTokenExpiryDate!=''">মেয়াদোত্তীর্ণ তারিখ: {{item.taxTokenExpiryDate}}</ion-text>
+                </ion-label>
+                <ion-label slot="end">
+                    <ion-text class="ion-text-wrap" style="color:#1c0bbf" *ngIf="item.freeTaxTokenYN =='Y' && item.taxTokenExpiryDateYn=='Y'">সংশ্লিষ্ট বিআরটিএ অফিস থেকে আপনার গাড়ির জন্য ফ্রি ট্যাক্স টোকেন সংগ্রহ করুন।</ion-text>
+                </ion-label>
+
+                <ion-button slot="end" class="item-btn" expand="full" color="button" *ngIf="item.taxTokenExpiryDateYn=='Y' && item.freeTaxTokenYN =='N'" (click)="goFor('TAX',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+
+        </div>
+
+    </div>
+    <!--End TAX-->
+
+    <!--Start ROUTE_PERMIT_WILL_EXPIRE_SOON  -->
+    <div *ngIf="((templateType=='ROUTE_PERMIT_WILL_EXPIRE_SOON' && showData))">
+        <!--<div class="center-image">
+            <ion-avatar routerLink="/vehicle-tagging">
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>-->
+
+        <div *ngFor="let item of vehicleInformationData">
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.routePermitExpiryDateYn == 'W' && item.routePermitExpiryDate!=''">
+                <ion-text>
+                    <ion-label class="item-label-data" color="h1">{{item.registrationNo}}</ion-label>
+                    <hr>
+                    <ion-label class="item-label-details" color="danger" *ngIf="item.routePermitExpiryDate!=''">মেয়াদোত্তীর্ণ তারিখ: {{item.routePermitExpiryDate}}</ion-label>
+                </ion-text>
+                <ion-button slot="end" class="item-btn" expand="full" color="button"  (click)="goFor('ROUTE_PERMIT',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+        </div>
+
+    </div>
+    <!--End ROUTE_PERMIT_WILL_EXPIRE_SOON-->
+
+    <!--Start ROUTE_PERMIT  -->
+    <div *ngIf="((templateType=='ROUTE_PERMIT' && showData))">
+        <!--<div class="center-image">
+            <ion-avatar routerLink="/vehicle-tagging">
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>-->
+
+
+        <div *ngFor="let item of vehicleInformationData">
+
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.routePermitExpiryDateYn == 'Y' && item.routePermitExpiryDate!=''">
+                <ion-text>
+                    <ion-label class="item-label-data" color="h1">{{item.registrationNo}}</ion-label>
+                    <hr>
+                    <ion-label class="item-label-details" color="danger" *ngIf="item.routePermitExpiryDate!=''">মেয়াদোত্তীর্ণ তারিখ: {{item.routePermitExpiryDate}}</ion-label>
+                </ion-text>
+                <ion-button slot="end" class="item-btn" expand="full" color="button" *ngIf="item.routePermitExpiryDateYn=='Y'" (click)="goFor('ROUTE_PERMIT',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+        </div>
+
+    </div>
+    <!--End ROUTE_PERMIT-->
+
+    <!--Start  TAGGED_VEHICLE  -->
+    <div *ngIf="((templateType=='TAGGED_VEHICLE' && showData))" class="tag-data">
+        <!--<div class="center-image">
+            <ion-avatar routerLink="/vehicle-tagging">
+                <img src="../../../assets/images/add.jpg">
+            </ion-avatar>
+        </div>-->
+
+        <ion-card class="tag-card" color="formbg" *ngFor="let item of vehicleInformationData">
+            <ion-item lines="none" class="activated" color="button">
+                <ion-label class="tag-card-content-title" slot="start">
+                    {{item.registrationNo }}
+                </ion-label>
+            </ion-item>
+
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.fitnessExpiryDate!=''">
+                <ion-text>
+                    <ion-label class="item-label-details" color="h1" *ngIf="item.fitnessExpiryDate!=''">ফিটনেস: {{item.fitnessExpiryDate}}</ion-label>
+                </ion-text>
+
+
+                <ion-button slot="end" class="item-btn" expand="full" color="button" *ngIf="item.fitnessExpiryDateYn!='N'" (click)="goFor('FITNESS',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+            <hr class="tag-hr">
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.taxTokenExpiryDate!=''">
+                <ion-label>
+                    <ion-text class="item-label-details ion-text-wrap" color="h1" *ngIf="item.taxTokenExpiryDate!=''">ট্যাক্স টোকেন: {{item.taxTokenExpiryDate}}</ion-text>
+                </ion-label>
+                <ion-label slot="end">
+                    <ion-text class="ion-text-wrap" style="color:#1c0bbf" *ngIf="item.freeTaxTokenYN =='Y' && item.taxTokenExpiryDateYn!='N'">সংশ্লিষ্ট বিআরটিএ অফিস থেকে আপনার গাড়ির জন্য ফ্রি ট্যাক্স টোকেন সংগ্রহ করুন।</ion-text>
+                </ion-label>
+
+                <ion-button slot="end" class="item-btn" expand="full" color="button" *ngIf="item.taxTokenExpiryDateYn!='N'  && item.freeTaxTokenYN =='N'" (click)="goFor('TAX',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+            <hr class="tag-hr">
+            <ion-item color="formbg" class="item-data" lines="none" *ngIf="item.routePermitExpiryDate!=''">
+                <ion-text>
+                    <ion-label class="item-label-details" color="h1" *ngIf="item.routePermitExpiryDate!=''">রুট পারমিট: {{item.routePermitExpiryDate}}</ion-label>
+                </ion-text>
+                <ion-button slot="end" class="item-btn" expand="full" color="button" *ngIf="item.routePermitExpiryDateYn!='N'" (click)="goFor('ROUTE_PERMIT',item)">
+                    <b>নবায়ন করুন</b>
+                </ion-button>
+            </ion-item>
+
+        </ion-card>
+
+    </div>
+    <!--End  TAGGED_VEHICLE-->
+
+</ion-content>

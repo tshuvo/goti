@@ -1,0 +1,141 @@
+#head {
+    //background-image: url("/assets/images/header-banner.jpg");
+    //min-height: 35%;
+    z-index: 0;
+    color: white;
+    background-color: #00047E;
+    ion-button {
+        font-size: small;
+        color: #fff;
+    }
+    .powered-logo {
+        height: 55%;
+        ion-img {
+            width: 50px;
+        }
+        ion-icon {
+            font-size: 70px;
+            //border:1px solid #97cda5;
+            //border-radius: 50%;
+            margin-top: -10px;
+        }
+    }
+    .header-middle-content {
+        text-align: center;
+        height: 100%;
+        display: -webkit-box;
+        -webkit-box-pack: center;
+        -webkit-box-align: center;
+        display: -moz-box;
+        -moz-box-pack: center;
+        -moz-box-align: center;
+        display: -ms-flexbox;
+        -ms-flex-pack: center;
+        -ms-flex-align: center;
+        width: auto;
+    }
+}
+
+//ion-tab-button{
+.main-menu {
+    font-size: 10px;
+    --padding-end: 20px;
+    --padding-start: 20px;
+    --padding-bottom: 0;
+    --padding-top: 10%;
+    --margin-left: 0px;
+    --margin-right: 0px;
+    max-width: 100px;
+    ion-icon {
+        font-size: 50px;
+    }
+    ion-label {
+        margin-top: 7px;
+        font-size: x-small;
+        display: contents;
+        line-height: inherit;
+        color: gray;
+    }
+}
+
+.content-slider {
+    // min-height: 65%;
+    min-height: 100%;
+    ion-slide {
+        padding: 3%;
+        text-align: unset;
+        margin: 0;
+        font-size: unset;
+        color: var(--ion-color-step-550, #737373);
+    }
+}
+
+.middle-content {
+    text-align: center;
+    height: 100%;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    display: -moz-box;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+    display: -ms-flexbox;
+    -ms-flex-pack: center;
+    -ms-flex-align: center;
+    width: auto;
+}
+
+ion-footer {
+    background-color: #fbfbfb;
+    border: none;
+}
+
+fieldset {
+    border-radius: 3%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 2%;
+}
+
+legend {
+    color: #00047E;
+    font-size: small;
+}
+
+.slide-html{
+    width: 100%;
+}
+
+.marquee {
+    width: 450px;
+    margin: 10px auto ;
+    overflow: hidden;
+    box-sizing: border-box;
+    color: #00047E;
+    font-size: large;
+}
+
+.marquee ion-label {
+    display: inline-block;
+    width: max-content;
+
+    padding-left: 100%;
+    /* show the marquee just outside the paragraph */
+    will-change: transform;
+    animation: marquee 30s linear infinite;
+}
+
+.marquee ion-label:hover {
+    animation-play-state: paused
+}
+
+
+@keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+
+/* Respect user preferences about animations */
+
+

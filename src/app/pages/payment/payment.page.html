@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text color="light" class="fw700">
+                    ফি জমার বিবরণী
+                </ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div *ngIf="showData==false">
+        <ion-item lines="none" color="danger" class="activated ion-text-center" style="background-color: #bdbfae;  color: #fff;">
+            <ion-label>দুঃখিত! ফি জমার কোন তথ্য পাওয়া যায় নি</ion-label>
+        </ion-item>
+    </div>
+
+    <div *ngIf="showData">
+        <ion-card color="formbg" *ngFor="let item of paymentHistory">
+            <ion-item lines="none" class="activated" color="button">
+                <ion-label class="content-title" slot="start">
+                    লেনদেন নং: {{item.tranNo}}
+                </ion-label>
+                <!-- <a href="showReceipt(item)" ><ion-button slot="end" expand="small" fill="outline" color="light">দেখুন </ion-button></a> -->
+            </ion-item>
+
+            <ion-card-content class="content-body">
+                <p class="p-content p-content-border">পরিমাণ:{{item.amount | currency:"৳ ":true:"1.2"}}</p>
+                <p class="p-content p-content-border">লেনদেন তারিখ:{{item.tranDate }}</p>
+                <p class="p-content">লেনদেনের উদ্দেশ্য: {{item.purpose | titlecase }}</p>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+</ion-content>

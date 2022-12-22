@@ -1,0 +1,229 @@
+.center-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  background: white;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 5px;
+  background-color: #F0F0F0;
+}
+::-webkit-scrollbar-thumb {
+  width: 100px;
+  background-color: #C7C7C7;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #A6A6A6;
+}
+.scrolling-wrapper-flexbox {
+  flex-wrap: nowrap;
+  transform: rotateX(180deg);
+  overflow-x: auto;
+  .scroll-items {
+    flex: 0 0 auto;
+    width: 150%;
+    transform: rotateX(180deg);
+  }
+}
+
+ion-app {
+  --ion-background-color: #EBEDEA;
+}
+
+.text-size {
+  font-size: 12px;
+}
+
+.text-size-2 {
+  font-size: 13px;
+}
+
+.row-divider {
+  color: #000;
+  font-size: 14px;
+}
+
+.ion-rows {
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.input-control {
+  // display: block;
+  width: 100%;
+  height: 35px;
+  //margin-left: 5px;
+  //padding: 6px 12px;
+  font-size: 13px;
+  //line-height: 1.42857143;
+  color: #000;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  // border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.textarea-control {
+  // display: block;
+  width: 100%;
+  height: 60px;
+  //margin-left: 5px;
+  //padding: 6px 12px;
+  font-size: 13px;
+  //line-height: 1.42857143;
+  color: #000;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  // border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.button-text {
+  border-radius: 0px;
+  width: 100%;
+  text-transform: none;
+  --ion-color-primary: #CB0920;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #fff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}
+
+.button-text-2 {
+  border-radius: 0px;
+  width: 100%;
+  text-transform: none;
+  --ion-color-primary: #5cb85c;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}
+
+.button-text-3 {
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  width: 100%;
+  text-transform: none;
+  --ion-color-primary: #1479B8;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #fff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}
+
+.button-text-4 {
+  width: 50%;
+  height: 30px;
+  --ion-color-primary: #D43F3A;
+  border-radius: 0px;
+  text-transform: none;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}
+
+.ion-cols {
+  padding: 0px;
+  margin: 0px;
+}
+
+.borders {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.borders-2 {
+  border-right: 1px solid #ccc;
+}
+
+.cols-padding {
+  padding: 10px 0px 10px 0px;
+}
+
+.lbl {
+  background-color: #D43F3A;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.lbl-2 {
+  background-color: #5cb85c;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+
+/**new css**/
+
+.item-data{
+  margin: 2%;
+  font-size: small;
+  .item-label-data{
+    padding-top: 7%;
+  }
+  .item-label-details{
+    padding-bottom: 7%;
+  }
+  hr{
+    border-top: 1px solid #86888f80 ;
+  }
+  .item-btn{
+    height: 70%;
+    width: 35%;
+    margin: 0;
+  }
+}
+
+.tag-data{
+    margin: 2%;
+    font-size: small;
+    .tag-card-content-title{
+      overflow: inherit;
+    }
+
+  .item-label-data{
+      padding-top: 7%;
+    }
+    .item-label-details{
+      padding-bottom: 0%;
+    }
+    hr{
+      border-top: 1px solid #86888f80 ;
+    }
+    .item-btn{
+      height: 70%;
+      width: 35%;
+      margin: 0;
+    }
+
+}
+
+
+

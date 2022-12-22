@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar color="button">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text color="light" class="fw700">ফি এর বিবরণ</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button text="" class="header_button_r" icon="arrow-round-back"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+    <ion-grid style="margin: 10px;" *ngIf="billData">
+        <ion-row style="background-color: #3880ff; color: #fff;">
+            <ion-col class="borders-2 ion-cols cols-padding" size="8">
+                <ion-label> ফি এর শ্রেণী</ion-label>
+            </ion-col>
+            <ion-col class="ion-text-right ion-cols cols-padding" size="4">
+                <ion-label> পরিমাণ </ion-label>
+            </ion-col>
+        </ion-row>
+
+
+        <div *ngFor="let item of billData" class="borders ion-cols">
+            <ion-row>
+                <ion-col class=" borders-2 ion-cols cols-padding" size="8">
+                    <ion-label class="row-divider"> {{item.ruleName}} </ion-label>
+                </ion-col>
+                <ion-col class="ion-text-right ion-cols cols-padding" size="4">
+                    <ion-label class="row-divider"> {{item.totalFee | currency:"৳ ":true:"1.2"}} </ion-label>
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <ion-row style="font-weight: bold;" class="borders ion-cols" *ngIf="billData">
+            <ion-col size="8" class="borders-2 ion-cols cols-padding">
+                <ion-label class="row-divider">
+                    মোট পরিমাণ (টাকা)
+                </ion-label>
+            </ion-col>
+            <ion-col class="ion-text-right ion-cols cols-padding" size="4">
+                <ion-label class="row-divider">{{totalBill | currency:"৳ ":true:"1.2"}}</ion-label>
+            </ion-col>
+        </ion-row>
+
+
+        <ion-row class="ion-rows borders ion-cols">
+            <ion-col size="6" class="ion-cols ion-text-center cols-padding">
+                <ion-button class="button-text" color="disabled" (click)="descardTransaction()"> লেনদেন বাতিল করুন
+                </ion-button>
+            </ion-col>
+
+            <ion-col class="ion-cols ion-text-center cols-padding" size="6">
+                <ion-button class="button-text-2" color="button" (click)="payNow(billFor)">ফি জমা দিন
+                </ion-button>
+                <ion-button #paymentBtn style="display:none">ফি জমা দিন</ion-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+    <div [hidden]="bankingTextShow" style="margin: 15px; font-size: large; color: #00047E; border: 1px solid #cccccc; padding: 5px">
+        <ion-row *ngFor="let item of bankingMessage" >
+            <ion-label style="padding: 5px 0 5px 0"> {{" * "+ item.toString().trim() +"।"}}</ion-label>
+        </ion-row>
+    </div>
+
+</ion-content>

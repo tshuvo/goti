@@ -1,0 +1,7 @@
+{
+  "bsp/*": {
+    "target": "http://210.4.76.98:8080/bsp",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
